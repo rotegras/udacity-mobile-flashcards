@@ -1,7 +1,7 @@
 import { RECEIVE_DECKS, ADD_DECK, ADD_QUESTION } from '../actions';
 
 
-export default function decks(state = {}, action) {
+export default function decksReducer(state = {}, action) {
   switch (action.type) {
     case RECEIVE_DECKS:
       return {
