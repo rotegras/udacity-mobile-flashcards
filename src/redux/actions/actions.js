@@ -23,7 +23,7 @@ function receiveDecks(decks) {
 
 function getDeckId(id) {
   return {
-    type: getDeck,
+    type: GET_DECK_ID,
     payload: deckId,
   }
 }
@@ -48,6 +48,7 @@ export {
   ADD_DECK,
   ADD_QUESTION,
   handleReceiveDecks,
+  receiveDecks,
   getDeckId,
   addDeck,
   addQuestion,
