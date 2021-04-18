@@ -6,6 +6,7 @@ import SingleDeck from './SingleDeck';
 import AddQuestion from './AddQuestion';
 import Quiz from './Quiz';
 
+
 const Stack = createStackNavigator();
 
 function MainStackNavigation ({ navigation }) {
@@ -13,7 +14,7 @@ function MainStackNavigation ({ navigation }) {
     <Stack.Navigator
       style={[styles.container, {flex: 1}]}
       screenOptions={{
-        initialRouteName: 'Decks',
+        initialRouteName: 'Quiz',
         headerShown: true,
       }}
     >
@@ -23,7 +24,7 @@ function MainStackNavigation ({ navigation }) {
         component={Decks}
       />
       <Stack.Screen
-        name='SingleDeck'
+        name='Deck Details'
         showHeader={false}
         component={SingleDeck}
       />

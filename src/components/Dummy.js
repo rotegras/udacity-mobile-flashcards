@@ -11,11 +11,10 @@ export default function Dummy() {
   return (
     <View style={styles.container}>
       <Card>
-
+        <Button mode='contained' icon='camera' onPress={handlePress}>
+          Press me
+        </Button>
       </Card>
-      <Button mode='contained' icon='camera' onPress={handlePress}>
-        Press me
-      </Button>
     </View>
   );
 }
@@ -24,7 +23,5 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     flex: 1,
-    borderColor: 'red',
-    borderWidth: 4,
   }
 })

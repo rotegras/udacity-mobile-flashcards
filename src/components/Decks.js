@@ -17,7 +17,7 @@ function Decks({ decks, navigation }) {
         ? decks.map((deck) => (
           <Card
             key={deck.name}
-            onPress={() => navigation.navigate('SingleDeck', { itemId: deck.name })}
+            onPress={() => navigation.navigate('Deck Details', { itemId: deck.name })}
             style={styles.card}
           >
           <View style={{ flexDirection: 'row', alignItems: 'center', paddingLeft: 12, }}>

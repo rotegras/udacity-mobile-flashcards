@@ -1,22 +1,21 @@
 import React, {useState} from 'react';
-import styled from 'styled-components/native';
 import { connect } from 'react-redux';
 import {
   Text,
   View,
   TextInput,
   StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
 } from 'react-native';
 import { addQuestion } from '../redux/actions';
-import { Card, Title, Button } from 'react-native-paper';
+import { Card, Button, RadioButton } from 'react-native-paper';
 
 
+// TODO: change answer to boolean and checkbox??
+//
 function AddQuestion({dispatch, navigation, route}) {
 
   const [question, setQuestion] = useState('');
-  const [answer, setAnswer] = useState('');
+  const [answer, setAnswer] = useState();
 
   const { deckId } = route.params;
 
@@ -25,7 +24,7 @@ function AddQuestion({dispatch, navigation, route}) {
     dispatch(addQuestion(deckId, question, answer));
     setQuestion('');
     setAnswer('');
-    navigation.navigate('SingleDeck', {deckId});
+    navigation.navigate('Deck Details', {deckId});
   }
 
   return (
@@ -35,20 +34,31 @@ function AddQuestion({dispatch, navigation, route}) {
           title='Add a new question'
         />
         <Card.Content>
-          <Text style={styles.label}>Question</Text>
           <TextInput
             value={question}
-            placeHolder='Enter Question Name'
+            placeholder='Enter Question'
             onChangeText={setQuestion}
             style={styles.input}
             />
-          <Text style={styles.label}>Answer</Text>
-          <TextInput
-            value={answer}
-            placeHolder='Enter Answer'
-            onChangeText={setAnswer}
-            style={styles.input}
-            />
+          <RadioButton.Group
+            onValueChange={newAnswer => setAnswer(newAnswer)} value={answer}
+            style={styles.row}
+            style={{flex: 1,}}
+          >
+            <Text style={{color: '#999', marginTop: 10}}>Enter the Answer</Text>
+            <View style={styles.row}>
+              <RadioButton
+                value="true"
+              />
+              <Text>True</Text>
+            </View>
+            <View style={styles.row}>
+              <RadioButton
+                value="false"
+              />
+              <Text>False</Text>
+            </View>
+          </RadioButton.Group>
           <Button
             onPress={handleAddQuestion} disabled={question === '' || answer === ''}
             icon="plus-thick" mode="contained" color='red'
@@ -73,18 +83,26 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    marginTop: 10,
+    marginTop: 6,
+    marginBottom: 6,
     borderColor: '#eee',
     backgroundColor: '#ebebeb',
+    paddingLeft: 12,
+    paddingRight: 12,
   },
   button: {
-    marginTop: 10,
+    marginTop: 16,
   },
   label: {
     color: '#999',
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   }
-});
 
+});
 
 
 export default connect()(AddQuestion);

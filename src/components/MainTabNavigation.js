@@ -4,7 +4,6 @@ import { View, Text, createTabNavigation, StyleSheet } from 'react-native';
 import { handleReceiveDecks } from '../redux/actions';
 import MainStackNavigation from './MainStackNavigation';
 import AddDeck from './AddDeck';
-import Dummy from './Dummy';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 
