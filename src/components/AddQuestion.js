@@ -6,7 +6,7 @@ import {
   TextInput,
   StyleSheet,
 } from 'react-native';
-import { addQuestion } from '../redux/actions';
+import { addQuestion } from '../redux/actions/actions';
 import { Card, Button, RadioButton } from 'react-native-paper';
 
 
