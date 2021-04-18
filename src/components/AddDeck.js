@@ -1,24 +1,12 @@
 import React, {useState} from 'react';
-import styled from 'styled-components/native';
 import {
-  Text,
-  View,
   TextInput,
   StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { addDeck } from '../redux/actions';
-import { Card, Title, Button } from 'react-native-paper';
+import { Card, Button } from 'react-native-paper';
 
-
-const StyledContainer = styled(SafeAreaView)`
-  justify-content: center;
-  border: 1px dashed black;
-  width: 100%;
-  opacity: .3;
-`;
 
 function AddDeck({dispatch, navigation}) {
 
@@ -60,7 +48,6 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     margin: 12,
-    borderWidth: 1,
   },
 });
 

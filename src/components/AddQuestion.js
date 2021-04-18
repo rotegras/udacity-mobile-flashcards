@@ -30,27 +30,34 @@ function AddQuestion({dispatch, navigation, route}) {
 
   return (
     <View style={styles.container}>
-      <Text>Add a New Question</Text>
-      <TextInput
-        value={question}
-        placeHolder='Enter Question Name'
-        onChangeText={setQuestion}
-        style={styles.input}
+      <Card style={styles.card}>
+        <Card.Title
+          title='Add a new question'
         />
-      <TextInput
-        value={answer}
-        placeHolder='Enter Answer'
-        onChangeText={setAnswer}
-        style={styles.input}
-        />
-      <Button onPress={handleAddQuestion} disabled={question === '' && answer === ''}>
-        <Text style={{flex: 1, textAlign: 'center'}}>Submit Question</Text>
-      </Button>
-      <Button
-        onPress={handleAddQuestion} disabled={question === '' && answer === ''}
-        icon="md-pizza" mode="contained" color='red'>
-        Submit Question
-      </Button>
+        <Card.Content>
+          <Text style={styles.label}>Question</Text>
+          <TextInput
+            value={question}
+            placeHolder='Enter Question Name'
+            onChangeText={setQuestion}
+            style={styles.input}
+            />
+          <Text style={styles.label}>Answer</Text>
+          <TextInput
+            value={answer}
+            placeHolder='Enter Answer'
+            onChangeText={setAnswer}
+            style={styles.input}
+            />
+          <Button
+            onPress={handleAddQuestion} disabled={question === '' || answer === ''}
+            icon="plus-thick" mode="contained" color='red'
+            style={styles.button}
+          >
+            Submit Question
+          </Button>
+        </Card.Content>
+      </Card>
     </View>
   )
 }
@@ -60,11 +67,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1,
   },
+  card: {
+    marginLeft: 10,
+    marginRight: 10,
+  },
   input: {
     height: 40,
-    margin: 12,
-    borderWidth: 1,
+    marginTop: 10,
+    borderColor: '#eee',
+    backgroundColor: '#ebebeb',
   },
+  button: {
+    marginTop: 10,
+  },
+  label: {
+    color: '#999',
+  }
 });
 
 
