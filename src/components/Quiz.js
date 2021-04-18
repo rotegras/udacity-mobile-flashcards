@@ -3,45 +3,101 @@ import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, Button } from 'react-native-paper';
 import { timeToString } from '../utils/helpers';
-import { addQuiz } from '../redux/actions';
+import { saveQuiz } from '../redux/actions/actions';
+
 
 
 function Quiz({ deck, cardNumber, navigation, dispatch }) {
 
+  const today = timeToString();
+
   const [cardQuestion, setCardQuestion] = useState(deck.questions[cardNumber].question);
-  const [answer, setAnswer] = useState(undefined);
+  const [answer, setAnswer] = useState();
+  const [guessed, setGuessed] = useState('');
+  const [isAnswered, setIsAnswered] = useState(false);
+
+  const lastCardNumber = deck.questions.length - 1;
 
   // TODO: handle last card
   // TODO: handle card flip / animate
   useEffect(() => {
-    console.log('deck name / card number: ', deck.name, cardNumber);
+    // TODO: clean
+    console.log(`
+    card number: ${cardNumber}
+    question: ${deck.questions[cardNumber].question}
+    answer: ${deck.questions[cardNumber].answer}
+    answer by me: ${answer}
+    `);
     setCardQuestion(deck.questions[cardNumber].question);
-  }, [cardNumber])
+  }, [cardNumber, answer])
 
-  const checkAnswer = () => {
-    const answered = answer === deck.questions[cardNumber].answer;
-    return answered;
+  const goToNextCard = () => {
+    setAnswer('');
+    setIsAnswered(false);
+    navigation.navigate('Quiz', { deckId: deck.name, cardNumber: cardNumber + 1 });
   }
 
-  const handleAnswer = (e) => {
-    const { value } = e.target;
-    setAnswer(value);
-    const quizAnswer = {
-      today,
-      deck: deck.name,
-      question: cardQuestion,
-      answerResult: checkAnswer(),
-    }
+  const answerCorrect = () => {
+    setAnswer(true);
+    setIsAnswered(true);
+    handleAnswer();
+  }
 
-    const today = timeToString();
-    dispatch(addQuiz)
-    if (cardNumber < deck.questions.length) {
-      setAnswer(undefined)
-      navigation.navigate('Quiz', { deckId: deck.name, cardNumber: cardNumber + 1 });
-    } else {
+  const answerIncorrect = () => {
+    setAnswer(false);
+    setIsAnswered(true);
+    handleAnswer();
+  }
+
+  const handleAnswer = () => {
+    const deckName = deck.name
+    const questionsLength = deck.questions.length;
+    deck.questions[cardNumber].answer === answer
+      && setAnswered((prevValue) => prevValue + 1);
+    dispatch(saveQuiz(today, deckName, questionsLength, guessed));
+    if( cardNumber < (deck.questions.length - 1)) {
+    }
+    // TODO: check/clean this
+    else {
       alert('no more questions');
     }
   }
+
+  const result = deck.questions[cardNumber].answer === answer
+      ? <Text>Your answer is correct</Text>
+      : <Text>Your answer is wrong</Text>;
+
+  if( isAnswered ) return (
+    <View>
+      <Card>
+        <Card.Title
+          title={result}
+          />
+          {
+            isAnswered && cardNumber < lastCardNumber &&
+            <Button
+              onPress={goToNextCard}
+              icon="arrow-right"
+              mode="contained"
+              color='green'
+              style={styles.button}
+            >
+              Next Question
+            </Button>
+          }
+          {
+          cardNumber >= lastCardNumber &&
+          <Button
+            icon="cancel" mode="contained"
+            color='orange'
+            style={styles.button}
+          >
+            See Stats
+          </Button>
+          }
+      </Card>
+    </View>
+  )
 
   return (
     <View style={styles.container}>
@@ -56,37 +112,40 @@ function Quiz({ deck, cardNumber, navigation, dispatch }) {
           <Text style={styles.questionText}>
             {cardQuestion}
           </Text>
-          {/* <Text>
-            {deck.questions[cardNumber].answer}
-          </Text> */}
-          <Button
-            onPress={(e) => handleAnswer(e)}
-            icon='check' mode='contained'
-            style={styles.button}
-            color='green'
-            value={true}
-          >
-            Correct
-          </Button>
-          <Button
-            onPress={(e) => handleAnswer(e)}
-            icon="cancel" mode="contained" color='red'
-            style={styles.button}
-            value={false}
-          >
-            Incorrect
-          </Button>
+          {
+            cardNumber < lastCardNumber &&
+            <View>
+              <Button
+                onPress={answerCorrect}
+                icon='check'
+                mode='contained'
+                style={styles.button}
+                color='green'
+              >
+                Correct
+              </Button>
+              <Button
+                onPress={answerIncorrect}
+                icon="cancel"
+                mode="contained"
+                color='red'
+                style={styles.button}
+              >
+                Incorrect
+              </Button>
+            </View>
+          }
         </Card.Content>
         <Text>{answer !== undefined && answer.toString()}</Text>
       </Card>
       <Card style={styles.container}>
         {
-          answer !== undefined &&
+          answer &&
           <Card.Content>
             {
               deck.questions[cardNumber].answer === answer
                 ? <Text>Your answer is correct</Text>
-                : <Text>Wrong</Text>
+                : <Text>Your answer is wrong</Text>
               }
           </Card.Content>
         }
