@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as S from './DecksCollection.style';
-import { Card, Title } from 'react-native-paper';
+import { Avatar, Card, Title } from 'react-native-paper';
 import {
   ScrollView,
   StyleSheet,
+  View,
 } from 'react-native';
 
 // TODO: LAZY LOAD ITEMS
@@ -19,10 +20,16 @@ function Decks({ decks, navigation }) {
             onPress={() => navigation.navigate('SingleDeck', { itemId: deck.name })}
             style={styles.card}
           >
+          <View style={{ flexDirection: 'row', alignItems: 'center', paddingLeft: 12, }}>
+            <Avatar.Text
+              size={48}
+              label={deck.name.split('')[0].toUpperCase()}
+            />
             <Card.Title
               title={deck.name}
               subtitle={`${deck.questions.length} cards`}
             />
+          </View>
         </ Card>
         ))
         : <View>There are no decks to show</View>

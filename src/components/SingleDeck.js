@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import AddQuestion from './AddQuestion';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
-import { Card, Title, Button } from 'react-native-paper';
+import { Avatar, Card, Title, Button } from 'react-native-paper';
 
 
 function SingleDeck({deck, navigation}) {
@@ -12,17 +12,22 @@ function SingleDeck({deck, navigation}) {
   }
 
   const navigateToQuiz = () => {
-    navigation.navigate('Quiz', { deckId: deck.name });
+    navigation.navigate('Quiz', { deckId: deck.name, cardNumber: 0 });
   }
 
   return (
     <View style={styles.container}>
       <Card style={styles.card}>
-        <Card.Title
-          title={deck.name}
-          subtitle={`${deck.questions.length} cards`}
-          style={styles.title}
-        />
+        <View style={styles.row}>
+          <Avatar.Text
+            size={48}
+            label={deck.name.split('')[0].toUpperCase()}
+          />
+          <Card.Title
+            title={deck.name}
+            subtitle={`${deck.questions.length} cards`}
+          />
+        </View>
         <Card.Content>
           <Button
             icon="pencil-plus"
@@ -50,6 +55,7 @@ function SingleDeck({deck, navigation}) {
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
+    flex: 1,
   },
   card: {
     marginTop: 32,
@@ -60,9 +66,12 @@ const styles = StyleSheet.create({
   button: {
     marginBottom: 16
   },
-  title: {
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 12,
     marginBottom: 48,
-  }
+  },
 })
 
 const mapStateToProps = ({ decks }, { route } ) => {
