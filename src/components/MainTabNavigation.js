@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, createTabNavigation, StyleSheet } from 'react-native';
 import { handleReceiveDecks } from '../redux/actions';
-import Decks from './Decks';
+import MainStackNavigation from './MainStackNavigation';
 import AddDeck from './AddDeck';
 import Dummy from './Dummy';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -28,7 +28,7 @@ function Main({dispatch}) {
       >
         <Tab.Screen
           name='Home'
-          component={Decks}
+          component={MainStackNavigation}
           style={styles.tab}
         />
         <Tab.Screen
@@ -43,7 +43,6 @@ function Main({dispatch}) {
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
     flex: 1,
     alignSelf: 'stretch',
     alignItems: 'center',
