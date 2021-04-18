@@ -6,29 +6,42 @@ import { Card, Button } from 'react-native-paper';
 
 function Quiz({ deck, cardNumber, navigation }) {
 
+  console.log('Card number: ', cardNumber);
+
+  const [q, setQ] = useState(deck.questions[cardNumber].question);
+
+  useEffect(() => {
+    setQ(deck.questions[cardNumber].question);
+  }, [cardNumber])
+
   const handleAnswer = () => {
-    navigation.navigate('Quiz', { deckId: deck.name, counter });
+    console.log(deck.name, cardNumber);
+    if (cardNumber < deck.questions.length) {
+      navigation.navigate('Quiz', { deckId: deck.name, cardNumber: cardNumber + 1 });
+    } else {
+      alert('no more questions');
+    }
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <Card style={styles.card}>
-        <Card.Title
-          subtitle={deck.name}
-          />
         <Card.Content>
-          <Text style={styles.textBig}>
-            {deck.questions[0].question}
+          <Text style={styles.label}>
+            {deck.name}
           </Text>
-          <Text>
-            {deck.questions[0].answer}
+          <Text style={styles.label}>
+            {deck.questions.length - cardNumber - 1} cards left
           </Text>
-          <Text>
-          {deck.questions.length} Cards
+          <Text style={styles.questionText}>
+            {q}
           </Text>
+          {/* <Text>
+            {deck.questions[cardNumber].answer}
+          </Text> */}
           <Button
             onPress={handleAnswer}
-            icon="check" mode="contained" color='red'
+            icon='check' mode='contained'
             style={styles.button}
             color='green'
           >
@@ -48,25 +61,35 @@ function Quiz({ deck, cardNumber, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  card: {
-    textAlign: 'center',
-    margin: 10,
+  container: {
+    justifyContent: 'center',
+    flex: 1,
   },
-  textBig: {
+  card: {
+    margin: 10,
+    paddingTop: 10,
+  },
+  questionText: {
     fontSize: 24,
     lineHeight: 30,
-    marginBottom: 32,
+    marginBottom: 48,
+    marginTop: 32,
   },
   button: {
     marginBottom: 10,
+  },
+  label: {
+    color: '#999',
   }
 });
 
 const mapStateToProps = ({ decks }, { route }) => {
-  const { deckId } = route.params;
+  const { deckId, cardNumber } = route.params;
   return {
-    deck: decks[deckId],
+    deck: decks[deckId] || 'react',
+    cardNumber,
   }
 }
+
 
 export default connect(mapStateToProps)(Quiz);
