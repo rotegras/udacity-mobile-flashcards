@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, createTabNavigation, StyleSheet } from 'react-native';
-import { handleReceiveDecks } from '../redux/actions';
+import { handleReceiveAllData  } from '../redux/actions/actions';
 import MainStackNavigation from './MainStackNavigation';
 import AddDeck from './AddDeck';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 
 function Main({dispatch}) {
   useEffect(() => {
-    dispatch(handleReceiveDecks());
+    dispatch(handleReceiveAllData());
   }, []);
 
   return (

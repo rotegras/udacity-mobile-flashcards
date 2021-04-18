@@ -1,15 +1,22 @@
 import { createStore, compose, applyMiddleware} from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import logger from '../middlewares/logger';
-import reducer from '../reducers';
+import reducer from '../reducers/rootReducer';
 
-  const store = createStore(
-    reducer,
-    compose(
-      applyMiddleware(
-        thunk,
-        logger,
-      ),
-    )
+
+const store = createStore(
+  reducer,
+  composeWithDevTools(
+    applyMiddleware(
+      thunk,
+      logger,
+    ),
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   )
-  export default store;
+)
+
+
+export default store;
+
+  // TODO: add async storage

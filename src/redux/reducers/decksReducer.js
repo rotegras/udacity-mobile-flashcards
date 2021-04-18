@@ -1,4 +1,4 @@
-import { RECEIVE_DECKS, ADD_DECK, ADD_QUESTION } from '../actions';
+import { RECEIVE_DECKS, ADD_DECK, ADD_QUESTION } from '../actions/actions';
 
 
 export default function decksReducer(state = {}, action) {
