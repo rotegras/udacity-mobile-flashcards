@@ -5,7 +5,7 @@ import Decks from './Decks';
 import SingleDeck from './SingleDeck';
 import AddQuestion from './AddQuestion';
 import Quiz from './Quiz';
-
+import Stats from './Stats';
 
 const Stack = createStackNavigator();
 
@@ -37,6 +37,11 @@ function MainStackNavigation ({ navigation }) {
         name='Quiz'
         showHeader={false}
         component={Quiz}
+      />
+      <Stack.Screen
+        name='Stats'
+        showHeader={false}
+        component={Stats}
       />
     </Stack.Navigator>
   )
