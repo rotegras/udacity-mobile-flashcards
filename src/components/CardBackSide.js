@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { Card, Button } from 'react-native-paper';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, Animated } from 'react-native';
+import styles from './Quiz.styles';
 
 
 export default function CardBackSide({ ...props }) {
@@ -13,6 +14,20 @@ export default function CardBackSide({ ...props }) {
     answer,
     goToStats,
   } = props;
+
+  const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
+
+  React.useEffect(() => {
+    Animated.timing(
+      fadeAnim,
+      {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      },
+    ).start();
+  }, [fadeAnim])
+
 
   const handleGoToNextCard = () => {
     goToNextCard();
@@ -27,7 +42,11 @@ export default function CardBackSide({ ...props }) {
       : <Text>Your answer is wrong</Text>;
 
   return (
-    <View style={styles.container}>
+    <Animated.View
+      style={[styles.container, {
+        ...props.style,
+        opacity: fadeAnim,
+      }]}>
       <Card style={styles.card}>
         <Card.Title
           title={result}
@@ -63,22 +82,6 @@ export default function CardBackSide({ ...props }) {
           }
           </Card.Content>
       </Card>
-    </View>
+    </Animated.View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    flex: 1,
-  },
-  card: {
-    margin: 10,
-    paddingTop: 10,
-  },
-  button: {
-    marginBottom: 10,
-    marginLeft: 10,
-    marginRight: 10,
-  }
-});

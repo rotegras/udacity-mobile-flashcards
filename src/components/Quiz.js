@@ -4,6 +4,8 @@ import { timeToString } from '../utils/helpers';
 import { saveQuiz } from '../redux/actions/actions';
 import CardBackSide from './CardBackSide';
 import CardFrontSide from './CardFrontSide';
+import { Animated } from 'react-native';
+import styles from './Quiz.styles';
 
 
 function Quiz({ deck, cardNumber, navigation, dispatch }) {
@@ -17,6 +19,28 @@ function Quiz({ deck, cardNumber, navigation, dispatch }) {
   const lastCardNumber = deck.questions.length - 1;
 
   // TODO: handle card flip / animate
+  //  const frontInterpolate = animatedValue.interpolate({
+  //     inputRange: [0, 180],
+  //     outputRange: ['0deg', '180deg'],
+  //   });
+  //   const backInterpolate = animatedValue.interpolate({
+  //     inputRange: [0, 180],
+  //     outputRange: ['180deg', '360deg'],
+  //   });
+
+
+  // useEffect(() => {
+  //   props.animatedValue = new Animated.Value = 0;
+  //   props.frontInterpolate = animatedValue.interpolate({
+  //     inputRange: [0, 180],
+  //     outputRange: ['0deg', '180deg'],
+  //   });
+  //   const backInterpolate = animatedValue.interpolate({
+  //     inputRange: [0, 180],
+  //     outputRange: ['180deg', '360deg'],
+  //   });
+  // }, []);
+
   useEffect(() => {
     setCardQuestion(deck.questions[cardNumber].question);
   }, [cardNumber, answer])
@@ -55,26 +79,26 @@ function Quiz({ deck, cardNumber, navigation, dispatch }) {
   }
 
   if ( isAnswered ) return (
-    <CardBackSide
-      goToNextCard={goToNextCard}
-      cardNumber={cardNumber}
-      lastCardNumber={lastCardNumber}
-      deck={deck}
-      isAnswered={isAnswered}
-      goToStats={goToStats}
-    />
+      <CardBackSide
+        goToNextCard={goToNextCard}
+        cardNumber={cardNumber}
+        lastCardNumber={lastCardNumber}
+        deck={deck}
+        isAnswered={isAnswered}
+        goToStats={goToStats}
+      />
   )
 
   return (
-    <CardFrontSide
-      cardNumber={cardNumber}
-      lastCardNumber={lastCardNumber}
-      deck={deck}
-      isAnswered={isAnswered}
-      cardQuestion={cardQuestion}
-      answerCorrect={answerCorrect}
-      answerIncorrect={answerIncorrect}
-    />
+      <CardFrontSide
+        cardNumber={cardNumber}
+        lastCardNumber={lastCardNumber}
+        deck={deck}
+        isAnswered={isAnswered}
+        cardQuestion={cardQuestion}
+        answerCorrect={answerCorrect}
+        answerIncorrect={answerIncorrect}
+      />
   );
 }
 
