@@ -21,12 +21,6 @@ function Quiz({ deck, cardNumber, navigation, dispatch }) {
     setCardQuestion(deck.questions[cardNumber].question);
   }, [cardNumber, answer])
 
-  const goToNextCard = () => {
-    setAnswer('');
-    setIsAnswered(false);
-    navigation.navigate('Quiz', { deckId: deck.name, cardNumber: cardNumber + 1 });
-  }
-
   const answerCorrect = () => {
     setAnswer(true);
     setIsAnswered(true);
@@ -39,6 +33,17 @@ function Quiz({ deck, cardNumber, navigation, dispatch }) {
     handleAnswer();
   }
 
+  const goToNextCard = () => {
+    setAnswer('');
+    setIsAnswered(false);
+    navigation.navigate('Quiz', { deckId: deck.name, cardNumber: cardNumber + 1 });
+  }
+
+  const goToStats = () => {
+    navigation.navigate('Stats', {today, deckName: deck.name});
+  }
+
+
   const handleAnswer = () => {
     const deckName = deck.name
     const questionsLength = deck.questions.length;
@@ -49,13 +54,14 @@ function Quiz({ deck, cardNumber, navigation, dispatch }) {
     }
   }
 
-  if( isAnswered ) return (
+  if ( isAnswered ) return (
     <CardBackSide
       goToNextCard={goToNextCard}
       cardNumber={cardNumber}
       lastCardNumber={lastCardNumber}
       deck={deck}
       isAnswered={isAnswered}
+      goToStats={goToStats}
     />
   )
 
@@ -64,6 +70,7 @@ function Quiz({ deck, cardNumber, navigation, dispatch }) {
       cardNumber={cardNumber}
       lastCardNumber={lastCardNumber}
       deck={deck}
+      isAnswered={isAnswered}
       cardQuestion={cardQuestion}
       answerCorrect={answerCorrect}
       answerIncorrect={answerIncorrect}
@@ -74,7 +81,7 @@ function Quiz({ deck, cardNumber, navigation, dispatch }) {
 const mapStateToProps = ({ decks }, { route }) => {
   const { deckId, cardNumber } = route.params;
   return {
-    deck: decks[deckId] || 'react',
+    deck: decks[deckId],
     cardNumber,
   }
 }
