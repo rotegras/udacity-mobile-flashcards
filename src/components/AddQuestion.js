@@ -7,24 +7,21 @@ import {
   StyleSheet,
 } from 'react-native';
 import { addQuestion } from '../redux/actions/actions';
-import { Card, Button, RadioButton } from 'react-native-paper';
+import { Card, Button } from 'react-native-paper';
 
 
-// TODO: change answer to boolean and checkbox??
-//
-function AddQuestion({dispatch, navigation, route}) {
+function AddQuestion({addQuestion, navigation, route}) {
 
   const [question, setQuestion] = useState('');
-  const [answer, setAnswer] = useState();
+  const [answer, setAnswer] = useState('');
 
-  const { deckId } = route.params;
+  const { deckName } = route.params;
 
   const handleAddQuestion = () => {
-    console.log(deckId, question, answer)
-    dispatch(addQuestion(deckId, question, answer));
+    addQuestion(deckName, question, answer);
     setQuestion('');
     setAnswer('');
-    navigation.navigate('Deck Details', {deckId});
+    navigation.navigate('Deck Details', {deckName});
   }
 
   return (
@@ -40,31 +37,18 @@ function AddQuestion({dispatch, navigation, route}) {
             onChangeText={setQuestion}
             style={styles.input}
             />
-          <RadioButton.Group
-            onValueChange={newAnswer => setAnswer(newAnswer)} value={answer}
-            style={styles.row}
-            style={{flex: 1,}}
-          >
-            <Text style={{color: '#999', marginTop: 10}}>Enter the Answer</Text>
-            <View style={styles.row}>
-              <RadioButton
-                value="true"
-              />
-              <Text>True</Text>
-            </View>
-            <View style={styles.row}>
-              <RadioButton
-                value="false"
-              />
-              <Text>False</Text>
-            </View>
-          </RadioButton.Group>
+          <TextInput
+            value={answer}
+            placeholder='Enter Answer'
+            onChangeText={setAnswer}
+            style={styles.input}
+            />
           <Button
             onPress={handleAddQuestion} disabled={question === '' || answer === ''}
             icon="plus-thick" mode="contained" color='red'
             style={styles.button}
           >
-            Submit Question
+            Add Question
           </Button>
         </Card.Content>
       </Card>
@@ -101,8 +85,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   }
-
 });
 
+const mapDispatchToProps = {
+  addQuestion,
+}
 
-export default connect()(AddQuestion);
+
+export default connect(null , mapDispatchToProps)(AddQuestion);
