@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as S from './DecksCollection.style';
 import { Avatar, Card, Title } from 'react-native-paper';
 import {
   ScrollView,
