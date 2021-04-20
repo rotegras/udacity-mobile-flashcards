@@ -18,29 +18,6 @@ function Quiz({ deck, cardNumber, navigation, dispatch }) {
   const today = timeToString();
   const lastCardNumber = deck.questions.length - 1;
 
-  // TODO: handle card flip / animate
-  //  const frontInterpolate = animatedValue.interpolate({
-  //     inputRange: [0, 180],
-  //     outputRange: ['0deg', '180deg'],
-  //   });
-  //   const backInterpolate = animatedValue.interpolate({
-  //     inputRange: [0, 180],
-  //     outputRange: ['180deg', '360deg'],
-  //   });
-
-
-  // useEffect(() => {
-  //   props.animatedValue = new Animated.Value = 0;
-  //   props.frontInterpolate = animatedValue.interpolate({
-  //     inputRange: [0, 180],
-  //     outputRange: ['0deg', '180deg'],
-  //   });
-  //   const backInterpolate = animatedValue.interpolate({
-  //     inputRange: [0, 180],
-  //     outputRange: ['180deg', '360deg'],
-  //   });
-  // }, []);
-
   useEffect(() => {
     setCardQuestion(deck.questions[cardNumber].question);
   }, [cardNumber, answer])
@@ -60,7 +37,7 @@ function Quiz({ deck, cardNumber, navigation, dispatch }) {
   const goToNextCard = () => {
     setAnswer('');
     setIsAnswered(false);
-    navigation.navigate('Quiz', { deckId: deck.name, cardNumber: cardNumber + 1 });
+    navigation.navigate('Quiz', { deckName: deck.name, cardNumber: cardNumber + 1 });
   }
 
   const goToStats = () => {
@@ -96,6 +73,7 @@ function Quiz({ deck, cardNumber, navigation, dispatch }) {
         deck={deck}
         isAnswered={isAnswered}
         cardQuestion={cardQuestion}
+        cardAnswer={answer}
         answerCorrect={answerCorrect}
         answerIncorrect={answerIncorrect}
       />
@@ -103,9 +81,9 @@ function Quiz({ deck, cardNumber, navigation, dispatch }) {
 }
 
 const mapStateToProps = ({ decks }, { route }) => {
-  const { deckId, cardNumber } = route.params;
+  const { deckName, cardNumber } = route.params;
   return {
-    deck: decks[deckId],
+    deck: decks[deckName],
     cardNumber,
   }
 }

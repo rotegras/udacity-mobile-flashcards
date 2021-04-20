@@ -1,18 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import AddQuestion from './AddQuestion';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
-import { Avatar, Card, Title, Button } from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { Avatar, Card, Button } from 'react-native-paper';
 
 
 function SingleDeck({deck, navigation}) {
 
   const navigateToAddQuestion = () => {
-    navigation.navigate('AddQuestion', { deckId: deck.name });
+    navigation.navigate('AddQuestion', { deckName: deck.name });
   }
 
   const navigateToQuiz = () => {
-    navigation.navigate('Quiz', { deckId: deck.name, cardNumber: 0 });
+    navigation.navigate('Quiz', { deckName: deck.name, cardNumber: 0 });
   }
 
   return (
