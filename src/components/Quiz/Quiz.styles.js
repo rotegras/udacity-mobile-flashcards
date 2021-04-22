@@ -1,9 +1,12 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: Dimensions.get('window').width,
+    // TODO: find value
+    minHeight: Dimensions.get('window').height - 300,
   },
   card: {
     flex: 1,

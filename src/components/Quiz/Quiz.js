@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Card  } from 'react-native-paper';
-import { Animated, View, Text } from 'react-native';
+import { Animated, Text } from 'react-native';
 import styles from './Quiz.styles';
 import QuizAnswer from './QuizAnswer';
 import ResultButtons from './ResultButtons';
 import NextCard from './NextCard';
+import CardHeader from './CardHeader';
 import PropType from 'prop-types';
 
 function Quiz({ cardQuestion, deckName, deckQuestions, cardNumber, route, ...props }) {
@@ -35,12 +36,7 @@ function Quiz({ cardQuestion, deckName, deckQuestions, cardNumber, route, ...pro
     >
       <Card style={styles.card}>
         <Card.Content>
-          <Text style={styles.label}>
-            {deckName}
-          </Text>
-          <Text style={styles.label}>
-            {questionsLength - cardNumber - 1} {cardLabel} left
-          </Text>
+          <CardHeader route={route} />
           <Text style={styles.questionText}>
             {cardQuestion}
           </Text>
