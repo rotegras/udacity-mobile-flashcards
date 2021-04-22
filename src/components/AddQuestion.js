@@ -6,7 +6,7 @@ import {
   TextInput,
   StyleSheet,
 } from 'react-native';
-import { addQuestion } from '../redux/actions/actions';
+import { addQuestion } from '../redux/actions/decksActions';
 import { Card, Button } from 'react-native-paper';
 
 

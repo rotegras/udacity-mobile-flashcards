@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import { connect } from 'react-redux';
 import { timeToString } from '../utils/helpers';
-import { saveQuiz } from '../redux/actions/actions';
+import { saveQuiz } from '../redux/actions/quizActions';
 import styles from './Quiz.styles';
 import { View, ScrollView, Text, Animated } from 'react-native';
 import { Card, Button } from 'react-native-paper';

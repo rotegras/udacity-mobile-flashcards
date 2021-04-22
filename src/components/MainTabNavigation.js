@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, createTabNavigation, StyleSheet } from 'react-native';
-import { handleReceiveAllData  } from '../redux/actions/actions';
+import { handleReceiveAllData  } from '../redux/actions/sharedActions';
 import MainStackNavigation from './MainStackNavigation';
 import AddDeck from './AddDeck';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';

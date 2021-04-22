@@ -1,4 +1,4 @@
-import { SAVE_QUIZ, RECEIVE_ALL_QUIZ } from '../actions/actions';
+import { SAVE_QUIZ, RECEIVE_ALL_QUIZ } from '../actions/quizActions';
 
 
 export default function quizReducer(state = {}, action) {

@@ -5,7 +5,7 @@ import {
   View,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { addDeck } from '../redux/actions/actions';
+import { addDeck } from '../redux/actions/decksActions';
 import { Card, Button } from 'react-native-paper';
 
 
