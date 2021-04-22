@@ -85,24 +85,31 @@ const decks = {
 }
 
 const quiz = {
-  '2021-03-10': {
-    react: {
-      questions: 4,
-      correct: 2,
-    },
-    flexbox: {
-      questions: 2,
-      correct: 1,
-    }
+  card: {
+    answerVisibility: false,
+    resultChecked: false,
+    cardNumber: 0,
   },
-  '2021-04-22': {
-    react: {
-      questions: 7,
-      correct: 6,
+  days: {
+    '2021-03-10': {
+      react: {
+        questions: 4,
+        correct: 2,
+      },
+      flexbox: {
+        questions: 2,
+        correct: 1,
+      }
     },
-    flexbox: {
-      questions: 2,
-      correct: 1,
+    '2021-04-22': {
+      react: {
+        questions: 7,
+        correct: 6,
+      },
+      flexbox: {
+        questions: 2,
+        correct: 1,
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import { connect } from 'react-redux';
 import { timeToString } from '../utils/helpers';
-import { saveQuiz } from '../redux/actions/quizActions';
+import { updateQuizResult } from '../redux/actions/quizActions';
 import styles from './Quiz.styles';
 import { View, ScrollView, Text, Animated } from 'react-native';
 import { Card, Button } from 'react-native-paper';
@@ -52,7 +52,7 @@ function Quiz({ cardAnswer, cardQuestion, deck, cardNumber, navigation, dispatch
   const handleAnswer = () => {
     const deckName = deck.name
     const questionsLength = deck.questions.length;
-    // dispatch(saveQuiz(today, deckName, questionsLength));
+    // dispatch(updateQuizResult(today, deckName, questionsLength));
   }
 
   return (

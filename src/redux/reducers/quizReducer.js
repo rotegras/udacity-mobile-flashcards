@@ -1,4 +1,10 @@
-import { SAVE_QUIZ, RECEIVE_ALL_QUIZ } from '../actions/quizActions';
+import {
+  RECEIVE_ALL_QUIZ,
+  UPDATE_QUIZ_RESULT,
+  SET_ANSWER_VISIBILITY,
+  SET_RESULT_CHECKED,
+  SET_CARD_NUMBER,
+} from '../actions/quizActions';
 
 
 export default function quizReducer(state = {}, action) {
@@ -6,9 +12,12 @@ export default function quizReducer(state = {}, action) {
     case RECEIVE_ALL_QUIZ:
       return {
         ...state,
-        ...action.payload,
+        days: {
+          ...state.days,
+          ...action.payload,
+        }
       }
-    case SAVE_QUIZ:
+    case UPDATE_QUIZ_RESULT:
       const { today, deckName, questions, correct } = action;
       const todayData = {
         [today]: {
@@ -18,10 +27,36 @@ export default function quizReducer(state = {}, action) {
           }
         }
       }
-
       return {
         ...state,
-        ...todayData,
+        days: {
+          ...state.days,
+          ...todayData,
+        }
+      }
+    case SET_ANSWER_VISIBILITY:
+      return {
+        ...state,
+        card: {
+          ...state.card,
+          visibility: action.payload,
+        }
+      }
+    case SET_RESULT_CHECKED:
+      return {
+        ...state,
+        card: {
+          ...state.card,
+          resultChecked: action.payload,
+        }
+      }
+    case SET_CARD_NUMBER:
+      return {
+        ...state,
+        card: {
+          ...state.card,
+          cardNumber: action.payload,
+        }
       }
     default:
       return state;
