@@ -14,7 +14,7 @@ export default function quizReducer(state = {}, action) {
         [today]: {
           [deckName]: {
             questions,
-            correct,
+            correct: [today][deckName].questions.correct + 1
           }
         }
       }

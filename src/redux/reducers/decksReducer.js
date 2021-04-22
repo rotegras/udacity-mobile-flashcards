@@ -17,13 +17,13 @@ export default function decksReducer(state = {}, action) {
         }
       }
     case ADD_QUESTION:
-      const { deckId, question, answer } = action.payload;
+      const { deckName, question, answer } = action.payload;
       return {
         ...state,
-        [deckId]: {
-          ...state[deckId],
+        [deckName]: {
+          ...state[deckName],
           'questions': [
-            ...state[deckId].questions,
+            ...state[deckName].questions,
             {
               'question': question,
               'answer': answer,
