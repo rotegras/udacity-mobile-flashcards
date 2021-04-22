@@ -68,13 +68,12 @@ function receiveAllQuiz(quiz) {
   }
 }
 
-function saveQuiz(today, deckName, questionsLength, guessed) {
+function saveQuiz(today, deckName, questionsLength) {
   return {
     type: SAVE_QUIZ,
     today,
     deckName,
     questions: questionsLength,
-    correct: guessed,
   }
 }
 
