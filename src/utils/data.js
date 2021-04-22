@@ -4,19 +4,19 @@ const decks = {
     questions: [
       {
         question: 'React follows uni-directional data flow or data binding.',
-        answer: true,
+        answer: 'Yes',
       },
       {
         question: 'componentWillMount() : Executed just before rendering takes place both on the client as well as server-side.',
-        answer: true,
+        answer: 'Yes',
       },
       {
         question: 'React is a framework',
-        answer: false,
+        answer: 'No',
       },
       {
         question: 'React is mainly used to build user interface',
-        answer: true,
+        answer: 'Yes',
       },
       {
         question: 'The lifecycle methods are mainly used for freeing app resources',
@@ -24,11 +24,11 @@ const decks = {
       },
       {
         question: 'Abstraction can be done while multiple elements need to be returned from a component',
-        answer: true,
+        answer: 'Yes',
       },
       {
         question: 'useState is used to pass data to a component from outside',
-        answer: false,
+        answer: 'No',
       },
     ]
   },
@@ -37,7 +37,7 @@ const decks = {
     questions: [
       {
         question: 'Which method is not part of ReactDOM?',
-        answer: false,
+        answer: 'one',
       },
     ],
   },
@@ -45,15 +45,43 @@ const decks = {
     name: 'flexbox',
     questions: [
       {
-        question: 'Use flexbox: 1 to set the width of a single element to a 100% of its parent',
-        answer: true,
+        question: 'Use ... to set the width of a single element to a 100% of its parent',
+        answer: 'flexbox: 1',
       },
       {
-        question: 'Flex direction is set to row as default',
-        answer: true,
+        question: 'Flex direction is set as default to... ',
+        answer: 'Row',
       },
     ]
-  }
+  },
+  scss: {
+    name: 'scss',
+    questions: [],
+  },
+  nodejs: {
+    name: 'nodejs',
+    questions: [],
+  },
+  bash: {
+    name: 'bash',
+    questions: [],
+  },
+  sql: {
+    name: 'sql',
+    questions: [],
+  },
+  gatsby: {
+    name: 'gatsby',
+    questions: [],
+  },
+  drupal: {
+    name: 'drupal',
+    questions: [],
+  },
+  wordpress: {
+    name: 'wordpress',
+    questions: [],
+  },
 }
 
 const quiz = {
