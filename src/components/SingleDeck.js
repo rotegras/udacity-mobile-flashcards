@@ -53,7 +53,7 @@ function SingleDeck({deck, navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    // justifyContent: 'center',
     flex: 1,
   },
   card: {
