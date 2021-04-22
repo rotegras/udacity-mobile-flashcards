@@ -89,6 +89,7 @@ const quiz = {
     answerVisibility: false,
     resultChecked: false,
     cardNumber: 0,
+    actualDeck: '',
   },
   days: {
     '2021-03-10': {
@@ -101,7 +102,7 @@ const quiz = {
         correct: 1,
       }
     },
-    '2021-04-22': {
+    '2021-04-12': {
       react: {
         questions: 7,
         correct: 6,
