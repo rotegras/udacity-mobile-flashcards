@@ -5,7 +5,6 @@ import {
   FlatList,
   StyleSheet,
   View,
-  Dimensions,
 } from 'react-native';
 
 
@@ -65,8 +64,6 @@ function Decks({ decks, navigation, dispatch }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: Dimensions.get('window').width,
-    minHeight: Dimensions.get('window').height,
     marginBottom: 100,
   },
   card: {
