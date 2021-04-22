@@ -4,6 +4,7 @@ import {
   SET_ANSWER_VISIBILITY,
   SET_RESULT_CHECKED,
   SET_CARD_NUMBER,
+  SET_ACTUAL_DECK,
 } from '../actions/quizActions';
 
 
@@ -12,18 +13,19 @@ export default function quizReducer(state = {}, action) {
     case RECEIVE_ALL_QUIZ:
       return {
         ...state,
-        days: {
-          ...state.days,
-          ...action.payload,
-        }
+        ...action.payload,
       }
     case UPDATE_QUIZ_RESULT:
-      const { today, deckName, questions, correct } = action;
+      const { today, deckName, questionsLength } = action;
+      const prevCorrect =
+        state.days[today] && state.days[today][deckName]
+          ? Object.assign(state.days[today][deckName].correct)
+          : 0;
       const todayData = {
         [today]: {
           [deckName]: {
-            questions,
-            correct: [today][deckName].questions.correct + 1
+            questions: questionsLength,
+            correct: prevCorrect + 1,
           }
         }
       }
@@ -31,6 +33,7 @@ export default function quizReducer(state = {}, action) {
         ...state,
         days: {
           ...state.days,
+
           ...todayData,
         }
       }
@@ -39,7 +42,7 @@ export default function quizReducer(state = {}, action) {
         ...state,
         card: {
           ...state.card,
-          visibility: action.payload,
+          answerVisibility: action.payload,
         }
       }
     case SET_RESULT_CHECKED:
@@ -56,6 +59,14 @@ export default function quizReducer(state = {}, action) {
         card: {
           ...state.card,
           cardNumber: action.payload,
+        }
+      }
+    case SET_ACTUAL_DECK:
+      return {
+        ...state,
+        card: {
+          ...state.card,
+          actualDeck: action.payload,
         }
       }
     default:
