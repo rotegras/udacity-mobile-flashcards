@@ -8,11 +8,20 @@ import {
   Dimensions,
 } from 'react-native';
 
+
 function CardItem({ deck, navigation }) {
+  const deckName = deck.name;
+  const handlePressDeck = () => {
+    navigation.navigate('Deck Details', { deckName })
+  }
+
+  const questionsLength = deck.questions.length;
+  const cardsLabel = questionsLength === 1 ? 'card' : 'cardss';
+
   return (
     <Card
-      key={deck.name}
-      onPress={() => navigation.navigate('Deck Details', { itemId: deck.name })}
+      key={deckName}
+      onPress={handlePressDeck}
       style={styles.card}
     >
       <View style={{ flexDirection: 'row', alignItems: 'center', paddingLeft: 12, }}>
@@ -22,18 +31,19 @@ function CardItem({ deck, navigation }) {
         />
         <Card.Title
           title={deck.name}
-          subtitle={`${deck.questions.length} cards`}
+          subtitle={`${questionsLength} ${cardsLabel}`}
         />
       </View>
     </ Card>
   )
 }
 
-function Decks({ decks, navigation }) {
+function Decks({ decks, navigation, dispatch }) {
   const renderItem= ({item}) => (
     <CardItem
       deck={item}
       navigation={navigation}
+      dispatch={dispatch}
     />
   )
 
@@ -73,5 +83,6 @@ const mapStateToProps = ({decks}) => {
     decks: Object.values(decks),
   }
 }
+
 
 export default connect(mapStateToProps)(Decks);

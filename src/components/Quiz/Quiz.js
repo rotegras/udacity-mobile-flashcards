@@ -6,9 +6,9 @@ import styles from './Quiz.styles';
 import QuizAnswer from './QuizAnswer';
 import ResultButtons from './ResultButtons';
 import NextCard from './NextCard';
+import PropType from 'prop-types';
 
-
-function Quiz({ cardAnswer, cardQuestion, deck, cardNumber, navigation, dispatch, route, ...props }) {
+function Quiz({ cardQuestion, deckName, deckQuestions, cardNumber, route, ...props }) {
 
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -23,7 +23,7 @@ function Quiz({ cardAnswer, cardQuestion, deck, cardNumber, navigation, dispatch
     ).start();
   }, [fadeAnim])
 
-  const questionsLength = deck.questions.length;
+  const questionsLength = deckQuestions.length;
   const cardLabel = questionsLength !== 1 ? 'cards' : 'card';
 
   return (
@@ -36,7 +36,7 @@ function Quiz({ cardAnswer, cardQuestion, deck, cardNumber, navigation, dispatch
       <Card style={styles.card}>
         <Card.Content>
           <Text style={styles.label}>
-            {deck.name}
+            {deckName}
           </Text>
           <Text style={styles.label}>
             {questionsLength - cardNumber - 1} {cardLabel} left
@@ -53,16 +53,24 @@ function Quiz({ cardAnswer, cardQuestion, deck, cardNumber, navigation, dispatch
   );
 }
 
-const mapStateToProps = ({ decks }, { route }) => {
-  const { deckName, cardNumber } = route.params;
+const mapStateToProps = ({ quiz, decks }, { route }) => {
+  const { deckName } = route.params;
+  const { cardNumber } = quiz.card;
   const deck = decks[deckName];
   return {
-    deck,
-    cardNumber: cardNumber,
-    cardAnswer: deck.questions[cardNumber].answer,
-    cardQuestion: deck.questions[cardNumber].question,
+    deckName,
+    deckQuestions: deck.questions,
+    cardNumber,
+    cardQuestion: deck.questions && deck.questions.length > 0
+      ? deck.questions[cardNumber].question
+      : '',
   }
 }
 
+const propTypes = {
+  deckName: PropType.string.isRequired,
+  decks: PropType.shape.isRequided,
+  route: PropType.shape.isRequided,
+}
 
 export default connect(mapStateToProps)(Quiz);

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-paper';
-import { setAnswerVisibility, setResultsChecked, updateQuizResult } from '../../redux/actions/quizActions';
+import { setAnswerVisibility, setCardNumber, setResultsChecked, updateQuizResult } from '../../redux/actions/quizActions';
 import styles from './Quiz.styles';
 import { timeToString } from '../../utils/helpers';
 import { useNavigation } from '@react-navigation/native';
@@ -18,6 +18,7 @@ function ResultButtons({
   resultsChecked,
   setResultsChecked,
   updateQuizResult,
+  setCardNumber,
 }) {
 
   const navigation = useNavigation();
@@ -25,9 +26,10 @@ function ResultButtons({
   const handlePressCorrect = () => {
     setResultsChecked(true);
     updateQuizResult(today, deckName, questionsLength);
-    if (cardNumber < questionsLength) {
+    if (cardNumber < (questionsLength -1)) {
       navigation.navigate('Quiz', {deckName, cardNumber: (cardNumber) => cardNumber + 1});
       setResultsChecked(false);
+      setCardNumber(cardNumber + 1);
       setAnswerVisibility(false);
     }
   }
@@ -68,8 +70,8 @@ function ResultButtons({
 }
 
 const mapStateToProps = ({quiz, decks}, { route }) => {
-  const { answerVisibility, resultsChecked } = quiz.card;
-  const { cardNumber, deckName } = route.params;
+  const { cardNumber, answerVisibility, resultsChecked } = quiz.card;
+  const { deckName } = route.params;
   return {
     answerVisibility,
     cardNumber,
@@ -83,6 +85,7 @@ const mapDispatchToProps = {
   setResultsChecked,
   updateQuizResult,
   setAnswerVisibility,
+  setCardNumber,
 }
 
 

@@ -2,16 +2,23 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
 import { Avatar, Card, Button } from 'react-native-paper';
+import { startQuiz } from '../redux/actions/quizActions';
+import { timeToString } from '../utils/helpers';
 
 
-function SingleDeck({deck, navigation}) {
+function SingleDeck({deck, navigation, startQuiz}) {
+
+  const today = timeToString();
+  const deckName = deck.name;
+  const questionsLength = deck.questions.length;
 
   const navigateToAddQuestion = () => {
-    navigation.navigate('AddQuestion', { deckName: deck.name });
+    navigation.navigate('AddQuestion', { deckName });
   }
 
   const navigateToQuiz = () => {
-    navigation.navigate('Quiz', { deckName: deck.name, cardNumber: 0 });
+    startQuiz(today, deckName, questionsLength)
+    navigation.navigate('Quiz', { deckName, cardNumber: 0 });
   }
 
   return (
@@ -20,11 +27,11 @@ function SingleDeck({deck, navigation}) {
         <View style={styles.row}>
           <Avatar.Text
             size={48}
-            label={deck.name.split('')[0].toUpperCase()}
+            label={deckName.split('')[0].toUpperCase()}
           />
           <Card.Title
-            title={deck.name}
-            subtitle={`${deck.questions.length} cards`}
+            title={deckName}
+            subtitle={`${questionsLength} cards`}
           />
         </View>
         <Card.Content>
@@ -74,10 +81,15 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = ({ decks }, { route } ) => {
-  const { itemId } = route.params;
+  const { deckName } = route.params;
+  // TODO: actualDeck is redundant?
   return {
-    deck: decks[itemId],
+    deck: decks[deckName],
   }
 }
 
-export default connect(mapStateToProps)(SingleDeck);
+const mapDispatchToProps = {
+  startQuiz,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleDeck);
