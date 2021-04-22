@@ -12,10 +12,12 @@ const Stack = createStackNavigator();
 function MainStackNavigation ({ navigation }) {
   return (
     <Stack.Navigator
-      style={[styles.container, {flex: 1}]}
+      style={[styles.container, {alignItems: 'center'}]}
       screenOptions={{
         initialRouteName: 'Quiz',
         headerShown: true,
+        headerMode: 'none',
+        headerTitleAlign: 'center',
       }}
     >
       <Stack.Screen
@@ -50,8 +52,6 @@ function MainStackNavigation ({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // width: 500,
-    // margin: '0 auto',
   },
 })
 
