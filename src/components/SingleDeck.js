@@ -1,12 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import { Avatar, Card, Button } from 'react-native-paper';
-import { startQuiz } from '../redux/actions/quizActions';
+import { startQuiz, setCardNumber, setAnswerVisibility } from '../redux/actions/quizActions';
 import { timeToString } from '../utils/helpers';
 
 
-function SingleDeck({deck, navigation, startQuiz}) {
+function SingleDeck({
+  deck,
+  navigation,
+  startQuiz,
+  setCardNumber,
+  setAnswerVisibility,
+}) {
 
   const today = timeToString();
   const deckName = deck.name;
@@ -18,6 +24,8 @@ function SingleDeck({deck, navigation, startQuiz}) {
 
   const navigateToQuiz = () => {
     startQuiz(today, deckName, questionsLength)
+    setCardNumber(0);
+    setAnswerVisibility(false);
     navigation.navigate('Quiz', { deckName, cardNumber: 0 });
   }
 
@@ -34,7 +42,7 @@ function SingleDeck({deck, navigation, startQuiz}) {
             subtitle={`${questionsLength} cards`}
           />
         </View>
-        <Card.Content>
+        <Card.Content style={styles.alignToBottom}>
           <Button
             icon="pencil-plus"
             mode="contained"
@@ -49,6 +57,7 @@ function SingleDeck({deck, navigation, startQuiz}) {
             onPress={navigateToQuiz}
             color='green'
             style={styles.button}
+            disabled={deck.questions.length === 0}
           >
             Start Quiz
           </Button>
@@ -60,14 +69,23 @@ function SingleDeck({deck, navigation, startQuiz}) {
 
 const styles = StyleSheet.create({
   container: {
-    // justifyContent: 'center',
     flex: 1,
+    width: Dimensions.get('window').width,
+    minHeight: Dimensions.get('window').height - 300,
   },
   card: {
-    marginTop: 32,
-    marginBottom: 16,
-    marginRight: 10,
-    marginLeft: 10,
+    flex: 1,
+    margin: 10,
+    paddingTop: 10,
+    justifyContent: 'space-between',
+  },
+  alignToBottom: {
+    marginTop: 'auto',
+    marginBottom: 0,
+  },
+  cardContent: {
+    flex: 1,
+    justifyContent: 'space-between',
   },
   button: {
     marginBottom: 16
@@ -90,6 +108,8 @@ const mapStateToProps = ({ decks }, { route } ) => {
 
 const mapDispatchToProps = {
   startQuiz,
+  setCardNumber,
+  setAnswerVisibility,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleDeck);
