@@ -8,6 +8,7 @@ import ResultButtons from './ResultButtons';
 import NextCard from './NextCard';
 import CardHeader from './CardHeader';
 import PropType from 'prop-types';
+import Stats from '../Stats';
 
 function Quiz({ cardQuestion, deckName, deckQuestions, cardNumber, route, ...props }) {
 
@@ -25,7 +26,6 @@ function Quiz({ cardQuestion, deckName, deckQuestions, cardNumber, route, ...pro
   }, [fadeAnim])
 
   const questionsLength = deckQuestions.length;
-  const cardLabel = questionsLength !== 1 ? 'cards' : 'card';
 
   return (
     <Animated.View style={[
@@ -35,15 +35,28 @@ function Quiz({ cardQuestion, deckName, deckQuestions, cardNumber, route, ...pro
       }]}
     >
       <Card style={styles.card}>
-        <Card.Content>
-          <CardHeader route={route} />
-          <Text style={styles.questionText}>
-            {cardQuestion}
-          </Text>
-          <QuizAnswer route={route} />
-          <ResultButtons route={route} />
-          <NextCard route={route} />
-        </Card.Content>
+        {
+          cardNumber  === ( questionsLength - 1)
+          ? <Card.Content>
+              <CardHeader route={route} />
+              <Stats route={route} />
+            </Card.Content>
+          : <Card.Content style={styles.cardContent}>
+              <CardHeader route={route} />
+              <Text style={styles.questionText}>
+                {cardQuestion}
+              </Text>
+              <QuizAnswer route={route}
+                style={styles.alignToBottom}
+              />
+              <ResultButtons route={route}
+                style={styles.alignToBottom}
+              />
+              <NextCard route={route}
+                style={styles.alignToBottom}
+              />
+            </Card.Content>
+          }
       </Card>
     </Animated.View>
   );

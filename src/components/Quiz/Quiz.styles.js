@@ -14,11 +14,13 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     justifyContent: 'space-between',
   },
-  answerWrapper: {
-    position: 'relative',
+  cardContent: {
     flex: 1,
-    height: 80,
-    padding: 50,
+    justifyContent: 'space-between',
+  },
+  alignToBottom: {
+    marginTop: 'auto',
+    marginBottom: 0,
   },
   questionText: {
     fontSize: 24,
@@ -27,19 +29,12 @@ const styles = StyleSheet.create({
     marginTop: 32,
   },
   button: {
-    marginBottom: 10,
+    marginTop: 10,
     flex: 1,
   },
   label: {
     color: '#999',
   },
-  flipCard: {
-    backfaceVisibility: 'hidden',
-  },
-  flipCardBack: {
-    position: 'absolute',
-    top: 0,
-  }
 });
 
 

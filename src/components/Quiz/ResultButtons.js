@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-paper';
-import { setAnswerVisibility, setCardNumber, setResultsChecked, updateQuizResult } from '../../redux/actions/quizActions';
+import { setAnswerVisibility, setCardNumber, updateQuizResult } from '../../redux/actions/quizActions';
 import styles from './Quiz.styles';
 import { timeToString } from '../../utils/helpers';
 import { useNavigation } from '@react-navigation/native';
@@ -15,8 +15,6 @@ function ResultButtons({
   questionsLength,
   answerVisibility,
   setAnswerVisibility,
-  resultsChecked,
-  setResultsChecked,
   updateQuizResult,
   setCardNumber,
 }) {
@@ -24,24 +22,26 @@ function ResultButtons({
   const navigation = useNavigation();
 
   const handlePressCorrect = () => {
-    setResultsChecked(true);
     updateQuizResult(today, deckName, questionsLength);
     if (cardNumber < (questionsLength -1)) {
       navigation.navigate('Quiz', {deckName, cardNumber: (cardNumber) => cardNumber + 1});
-      setResultsChecked(false);
       setCardNumber(cardNumber + 1);
       setAnswerVisibility(false);
     }
   }
 
   const handlePressIncorrect = () => {
-    setResultsChecked(true);
+    if (cardNumber < (questionsLength - 1)) {
+      navigation.navigate('Quiz', { deckName, cardNumber: (cardNumber) => cardNumber + 1 });
+      setCardNumber(cardNumber + 1);
+      setAnswerVisibility(false);
+    }
   }
 
   return (
     <View style={{marginTop: 'auto', marginBottom: 0,}}>
       {
-        !resultsChecked &&
+        answerVisibility &&
         <View>
           <Button
             onPress={handlePressCorrect}
@@ -70,19 +70,17 @@ function ResultButtons({
 }
 
 const mapStateToProps = ({quiz, decks}, { route }) => {
-  const { cardNumber, answerVisibility, resultsChecked } = quiz.card;
+  const { cardNumber, answerVisibility } = quiz.card;
   const { deckName } = route.params;
   return {
     answerVisibility,
     cardNumber,
     deckName,
     questionsLength: decks[deckName].questions.length,
-    resultsChecked,
   }
 }
 
 const mapDispatchToProps = {
-  setResultsChecked,
   updateQuizResult,
   setAnswerVisibility,
   setCardNumber,

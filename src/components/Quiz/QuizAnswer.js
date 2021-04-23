@@ -12,23 +12,23 @@ function QuizAnswer({ answerVisibility, cardAnswer, setAnswerVisibility }) {
   }
 
   return (
-    <View style={styles.answerWrapper}>
-        {
-          !answerVisibility
-            ?
-              <Button
-                icon='pencil-plus'
-                mode='contained'
-                color={'green'}
-                onPress={handleAnswerVisibility}
-                style={[styles.button, { alignSelf: 'stretch', position: 'absolute', top: 0, left: 0 }]}
-              >
-                Show Anser
-              </Button>
-            : <Text style={{position: 'absolute'}}>
-                Answer: {cardAnswer}
-              </Text>
-        }
+    <View style={styles.alignToBottom}>
+    {
+      !answerVisibility
+        ?
+          <Button
+            icon='pencil-plus'
+            mode='contained'
+            color={'green'}
+            onPress={handleAnswerVisibility}
+            style={styles.button}
+          >
+            Show Anser
+          </Button>
+        : <Text>
+            Answer: {cardAnswer}
+          </Text>
+    }
     </View>
   )
 }

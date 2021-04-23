@@ -17,6 +17,9 @@ function CardHeader({ deckName, cardNumber, deckQuestions }) {
       <Text style={styles.label}>
         {questionsLength - cardNumber - 1} {cardLabel} left
       </Text>
+      <Text>
+        {cardNumber + 1} / {questionsLength}
+      </Text>
     </View>
   )
 }
