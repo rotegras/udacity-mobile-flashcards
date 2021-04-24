@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Avatar, Card, Title } from 'react-native-paper';
+import { Avatar, Card } from 'react-native-paper';
 import {
   FlatList,
   StyleSheet,
   View,
+  SafeAreaView,
 } from 'react-native';
 
 
@@ -47,24 +48,19 @@ function Decks({ decks, navigation, dispatch }) {
   )
 
   return (
-    <View>
-    { decks
-      ? <FlatList
-          style={styles.container}
+    <SafeAreaView style={styles.container}>
+      <FlatList
           data = {decks}
           keyExtractor={(item) => item.name}
           renderItem={renderItem}
         />
-      : <View>There are no decks to show</View>
-    }
-    </View>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 100,
   },
   card: {
     marginTop: 10,

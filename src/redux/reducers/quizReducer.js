@@ -22,24 +22,29 @@ export default function quizReducer(state = {}, action) {
         days: {
           ...state.days,
           [action.today]: {
-            questions: action.questionsLength,
-            correct: 0,
+            ...state[action.today],
+            [action.deckName]: {
+              questions: action.questionsLength,
+              correct: 0,
+            }
           }
         }
       }
     case UPDATE_QUIZ_RESULT:
-      const { today, deckName } = action;
       const prevCorrect =
-        state.days[today] && state.days[today][deckName]
-          ? Object.assign(state.days[today][deckName].correct)
+        state.days[action.today] && state.days[action.today][action.deckName]
+          ? Object.assign(state.days[action.today][action.deckName].correct)
           : 0;
       return {
         ...state,
         days: {
           ...state.days,
-          [today]: {
-            ...state.days[today],
-            correct: prevCorrect + 1,
+          [action.today]: {
+            ...state.days[action.today],
+            [action.deckName]: {
+              ...state.days[action.today][action.deckName],
+              correct: prevCorrect + 1,
+            }
           }
         }
       }
