@@ -84,3 +84,5 @@ export default function quizReducer(state = {}, action) {
       return state;
   }
 }
+
+// TODO: remove actualDeck in reducer and actions

@@ -3,6 +3,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import logger from '../middlewares/logger';
 import rootReducer from '../reducers/rootReducer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { persistStore } from 'redux-persist';
 
 
 const store = createStore(
@@ -12,11 +14,13 @@ const store = createStore(
       thunk,
       logger,
     ),
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   )
 )
 
+const persistor = persistStore(store);
 
-export default store;
+export {
+  store, persistor,
+};
 
-  // TODO: add async storage
+// TODO: add async storage
