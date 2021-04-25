@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.15.4",
     "@react-navigation/bottom-tabs": "^5.11.9",
     "@react-navigation/material-bottom-tabs": "^5.3.15",
     "@react-navigation/material-top-tabs": "^5.3.15",
@@ -29,6 +30,7 @@
     "react-redux": "^7.2.3",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "remote-redux-devtools": "^0.5.16",
     "styled-components": "^5.2.3"

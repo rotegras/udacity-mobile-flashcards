@@ -1,8 +1,8 @@
 Arguments: 
-  /home/rotegras/.nvm/versions/node/v12.18.0/bin/node /home/rotegras/.nvm/versions/node/v12.18.0/bin/yarn run expo start
+  /home/rotegras/.nvm/versions/node/v12.18.0/bin/node /home/rotegras/.nvm/versions/node/v12.18.0/bin/yarn add @rn add @react-native-async-storage/async-storage
 
 PATH: 
-  /home/rotegras/Android/Sdk//tools:/home/rotegras/Android/Sdk//platform-tools:/home/rotegras/Android/Sdk/:/home/rotegras/.config/yarn/global:/usr/bin:/home/rotegras/.nvm/versions/node/v12.18.0/bin:/home/rotegras/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-15-oracle/bin:/usr/lib/jvm/java-15-oracle/db/bin:/home/rotegras/.local/bin:/home/rotegras/.config/composer/vendor/bin:/home/rotegras/www/wpcs/phpcs/bin:{/home/rotegras/.nvm/versions/node/v12.18.0/bin:/home/rotegras/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-15-oracle/bin:/usr/lib/jvm/java-15-oracle/db/bin:/home/rotegras/.local/bin:/home/rotegras/.config/composer/vendor/bin}:/usr/lib/jvm/java-15-oracle/bin:/home/rotegras/.nvm/versions/node/v12.18.0/bin:/media/work/_genymotion/genymotion/genymotion
+  /home/rotegras/.nvm/versions/node/v12.18.0/bin:/home/rotegras/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-15-oracle/bin:/usr/lib/jvm/java-15-oracle/db/bin
 
 Yarn version: 
   1.22.10
@@ -14,12 +14,17 @@ Platform:
   linux x64
 
 Trace: 
-  SyntaxError: /media/work/www/udacity/_projects/mobile-flash-cards/package.json: Unexpected token } in JSON at position 217
-      at JSON.parse (<anonymous>)
-      at /home/rotegras/.nvm/versions/node/v12.18.0/lib/node_modules/yarn/lib/cli.js:1625:59
-      at Generator.next (<anonymous>)
-      at step (/home/rotegras/.nvm/versions/node/v12.18.0/lib/node_modules/yarn/lib/cli.js:310:30)
-      at /home/rotegras/.nvm/versions/node/v12.18.0/lib/node_modules/yarn/lib/cli.js:321:13
+  Error: https://registry.yarnpkg.com/@rn: Request "https://registry.yarnpkg.com/@rn" returned a 405
+      at Request.params.callback [as _callback] (/home/rotegras/.nvm/versions/node/v12.18.0/lib/node_modules/yarn/lib/cli.js:66997:18)
+      at Request.self.callback (/home/rotegras/.nvm/versions/node/v12.18.0/lib/node_modules/yarn/lib/cli.js:140662:22)
+      at Request.emit (events.js:315:20)
+      at Request.<anonymous> (/home/rotegras/.nvm/versions/node/v12.18.0/lib/node_modules/yarn/lib/cli.js:141634:10)
+      at Request.emit (events.js:315:20)
+      at IncomingMessage.<anonymous> (/home/rotegras/.nvm/versions/node/v12.18.0/lib/node_modules/yarn/lib/cli.js:141556:12)
+      at Object.onceWrapper (events.js:421:28)
+      at IncomingMessage.emit (events.js:327:22)
+      at endReadableNT (_stream_readable.js:1221:12)
+      at processTicksAndRejections (internal/process/task_queues.js:84:21)
 
 npm manifest: 
   {
@@ -29,9 +34,10 @@ npm manifest:
       "android": "expo start --android",
       "ios": "expo start --ios",
       "web": "expo start --web",
-      "eject": "expo eject",
+      "eject": "expo eject"
     },
     "dependencies": {
+      "@react-native-async-storage/async-storage": "react-native-community/async-storage",
       "@react-navigation/bottom-tabs": "^5.11.9",
       "@react-navigation/material-bottom-tabs": "^5.3.15",
       "@react-navigation/material-top-tabs": "^5.3.15",
@@ -42,15 +48,18 @@ npm manifest:
       "react": "16.13.1",
       "react-dom": "16.13.1",
       "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+      "react-native-debugger": "^1.1.0",
       "react-native-gesture-handler": "~1.8.0",
       "react-native-material-design": "^0.3.7",
       "react-native-paper": "^4.7.2",
-      "react-native-safe-area-context": "^3.1.9",
+      "react-native-safe-area": "^0.5.1",
+      "react-native-safe-area-context": "^3.2.0",
       "react-native-screens": "~2.15.2",
       "react-native-web": "~0.13.12",
       "react-redux": "^7.2.3",
       "redux": "^4.0.5",
       "redux-devtools-extension": "^2.13.9",
+      "redux-persist": "^6.0.0",
       "redux-thunk": "^2.3.0",
       "remote-redux-devtools": "^0.5.16",
       "styled-components": "^5.2.3"
@@ -1713,6 +1722,12 @@ Lockfile:
       "@babel/runtime" "^7.7.2"
       regenerator-runtime "^0.13.3"
   
+  "@react-native-async-storage/async-storage@react-native-community/async-storage":
+    version "1.13.0"
+    resolved "https://codeload.github.com/react-native-community/async-storage/tar.gz/c2aa400b27c0821abe0d25319c57a179f9f99034"
+    dependencies:
+      deep-assign "^3.0.0"
+  
   "@react-native-community/cli-debugger-ui@^4.13.1":
     version "4.13.1"
     resolved "https://registry.yarnpkg.com/@react-native-community/cli-debugger-ui/-/cli-debugger-ui-4.13.1.tgz#07de6d4dab80ec49231de1f1fbf658b4ad39b32c"
@@ -1952,6 +1967,15 @@ Lockfile:
     version "17.0.3"
     resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.3.tgz#ba6e215368501ac3826951eef2904574c262cc79"
     integrity sha512-wYOUxIgs2HZZ0ACNiIayItyluADNbONl7kt8lkLjVK8IitMH5QMyAh75Fwhmo37r1m7L2JaFj03sIfxBVDvRAg==
+    dependencies:
+      "@types/prop-types" "*"
+      "@types/scheduler" "*"
+      csstype "^3.0.2"
+  
+  "@types/react@^16.8.8":
+    version "16.14.5"
+    resolved "https://registry.yarnpkg.com/@types/react/-/react-16.14.5.tgz#2c39b5cadefaf4829818f9219e5e093325979f4d"
+    integrity sha512-YRRv9DNZhaVTVRh9Wmmit7Y0UFhEVqXqCSw3uazRWMxa2x85hWQZ5BN24i7GXZbaclaLXEcodEeIHsjBA8eAMw==
     dependencies:
       "@types/prop-types" "*"
       "@types/scheduler" "*"
@@ -3858,6 +3882,11 @@ Lockfile:
       statuses ">= 1.5.0 < 2"
       toidentifier "1.0.0"
   
+  humps@^2.0.1:
+    version "2.0.1"
+    resolved "https://registry.yarnpkg.com/humps/-/humps-2.0.1.tgz#dd02ea6081bd0568dc5d073184463957ba9ef9aa"
+    integrity sha1-3QLqYIG9BWjcXQcxhEY5V7qe+ao=
+  
   hyphenate-style-name@^1.0.2, hyphenate-style-name@^1.0.3:
     version "1.0.4"
     resolved "https://registry.yarnpkg.com/hyphenate-style-name/-/hyphenate-style-name-1.0.4.tgz#691879af8e220aea5750e8827db4ef62a54e361d"
@@ -4609,7 +4638,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
     integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
   
-  lodash@^4.0.0, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.3.0, lodash@^4.5.0, lodash@^4.6.0:
+  lodash@^4.0.0, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.5.0, lodash@^4.6.0:
     version "4.17.21"
     resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
     integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -5689,6 +5718,21 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
     integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
   
+  react-native-debugger@^1.1.0:
+    version "1.1.0"
+    resolved "https://registry.yarnpkg.com/react-native-debugger/-/react-native-debugger-1.1.0.tgz#88ae36c229a7da6c8e97e0e98e366eca55d4736a"
+    integrity sha512-ckFI3QztvmLUVE/TCA++V5apVWrsARejSXqSFdTtiKmTNOsHhF+KjiVzwBYk1TegiSCjDU0LHO4m5b+HjN0Ncg==
+    dependencies:
+      humps "^2.0.1"
+      lodash "^4.17.5"
+      react-native-device-info "^0.10.2"
+      redux-create-reducer "^1.1.1"
+  
+  react-native-device-info@^0.10.2:
+    version "0.10.2"
+    resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.10.2.tgz#350cd68ed43839022ddea0a3a423439f16fa4fba"
+    integrity sha1-NQzWjtQ4OQIt3qCjpCNDnxb6T7o=
+  
   react-native-gesture-handler@~1.8.0:
     version "1.8.0"
     resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.8.0.tgz#18f61f51da50320f938957b0ee79bc58f47449dc"
@@ -5730,10 +5774,17 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.1.9.tgz#48864ea976b0fa57142a2cc523e1fd3314e7247e"
     integrity sha512-wmcGbdyE/vBSL5IjDPReoJUEqxkZsywZw5gPwsVUV1NBpw5eTIdnL6Y0uNKHE25Z661moxPHQz6kwAkYQyorxA==
   
-  react-native-safe-area-context@^3.1.9:
+  react-native-safe-area-context@^3.2.0:
     version "3.2.0"
     resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.2.0.tgz#06113c6b208f982d68ab5c3cebd199ca93db6941"
     integrity sha512-k2Nty4PwSnrg9HwrYeeE+EYqViYJoOFwEy9LxL5RIRfoqxAq/uQXNGwpUg2/u4gnKpBbEPa9eRh15KKMe/VHkA==
+  
+  react-native-safe-area@^0.5.1:
+    version "0.5.1"
+    resolved "https://registry.yarnpkg.com/react-native-safe-area/-/react-native-safe-area-0.5.1.tgz#b0263f5fcd1341c74dee0e5f0b296da965242a14"
+    integrity sha512-gBLv93P90sM6hk5HzUwTXzFuSDazTpg2ONi5iL9pnUsUfwdw2L9SKgjgVroxX10leGB9+0zz6/ycV+mItqr8OQ==
+    dependencies:
+      "@types/react" "^16.8.8"
   
   react-native-screens@~2.15.2:
     version "2.15.2"
@@ -5856,6 +5907,11 @@ Lockfile:
       string_decoder "~1.1.1"
       util-deprecate "~1.0.1"
   
+  redux-create-reducer@^1.1.1:
+    version "1.2.0"
+    resolved "https://registry.yarnpkg.com/redux-create-reducer/-/redux-create-reducer-1.2.0.tgz#accdd7f36509b202c7602f14c0fb827a4d1c3dde"
+    integrity sha512-H+bi4NCgw253xVVGHRnQQyWVkl2v0MDUiWRzFrSexcSgZ84JOa9Phsso1IRKKkrqGvBqQn2+oLZYdB3/qG99FQ==
+  
   redux-devtools-core@^0.2.1:
     version "0.2.1"
     resolved "https://registry.yarnpkg.com/redux-devtools-core/-/redux-devtools-core-0.2.1.tgz#4e43cbe590a1f18c13ee165d2d42e0bc77a164d8"
@@ -5879,6 +5935,11 @@ Lockfile:
     dependencies:
       lodash "^4.17.19"
       symbol-observable "^1.2.0"
+  
+  redux-persist@^6.0.0:
+    version "6.0.0"
+    resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-6.0.0.tgz#b4d2972f9859597c130d40d4b146fecdab51b3a8"
+    integrity sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==
   
   redux-thunk@^2.3.0:
     version "2.3.0"
