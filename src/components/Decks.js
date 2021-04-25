@@ -15,7 +15,8 @@ function CardItem({ deck, navigation }) {
     navigation.navigate('Deck Details', { deckName })
   }
 
-  const questionsLength = deck.questions.length;
+
+  const questionsLength = deck.questions?.length;
   const cardsLabel = questionsLength === 1 ? 'card' : 'cardss';
 
   return (
@@ -27,7 +28,7 @@ function CardItem({ deck, navigation }) {
       <View style={{ flexDirection: 'row', alignItems: 'center', paddingLeft: 12, }}>
         <Avatar.Text
           size={48}
-          label={deck.name.split('')[0].toUpperCase()}
+          label={deck.name?.split('')[0].toUpperCase() || 'X'}
         />
         <Card.Title
           title={deck.name}
@@ -38,7 +39,7 @@ function CardItem({ deck, navigation }) {
   )
 }
 
-function Decks({ decks, navigation, dispatch }) {
+function Decks({ sortedDecks, navigation, dispatch }) {
   const renderItem= ({item}) => (
     <CardItem
       deck={item}
@@ -50,7 +51,7 @@ function Decks({ decks, navigation, dispatch }) {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-          data = {decks}
+          data = {sortedDecks}
           keyExtractor={(item) => item.name}
           renderItem={renderItem}
         />
@@ -73,9 +74,12 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = ({decks}) => {
   return {
-    decks: Object.values(decks),
+    sortedDecks: Object.values(decks)
+      .sort((a, b) => b.name - a.name),
   }
 }
 
 
 export default connect(mapStateToProps)(Decks);
+
+// TODO: default props??
