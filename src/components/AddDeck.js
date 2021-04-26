@@ -23,20 +23,22 @@ function AddDeck({dispatch, navigation}) {
     <View style={styles.container}>
       <Card style={styles.card}>
         <Card.Title title='Add new Deck' />
-        <TextInput
-          value={deckName}
-          placeholder='Enter Deck Name'
-          onChangeText={setDeckName}
-          style={styles.input}
-          />
-        <Button
-          onPress={handleAddDeck}
-          disabled={deckName === ''}
-          mode='contained'
-          icon="pencil-plus"
-        >
-          Submit
-        </Button>
+        <Card.Content style={styles.alignToBottom}>
+          <TextInput
+            value={deckName}
+            placeholder='Enter Deck Name'
+            onChangeText={setDeckName}
+            style={styles.input}
+            />
+          <Button
+            onPress={handleAddDeck}
+            disabled={deckName === ''}
+            mode='contained'
+            icon='pencil-plus'j
+          >
+            Submit
+          </Button>
+        </Card.Content>
       </Card>
     </View>
   )
@@ -53,14 +55,21 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     padding: 10,
+    flex: 1,
+    justifyContent: 'space-between',
   },
   input: {
     height: 40,
-    margin: 12,
+    marginTop: 12,
+    marginBottom: 12,
     backgroundColor: '#ebebeb',
-    paddingRight: 10,
     paddingLeft: 10,
   },
+  alignToBottom: {
+    marginTop: 'auto',
+    marginBottom: 0,
+    justifyContent: 'flex-end',
+  }
 });
 
 
