@@ -1,18 +1,43 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
 import { connect } from 'react-redux';
-import { Card, Button } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import { timeToString } from '../utils/helpers';
-import CardHeader from './Quiz/CardHeader';
+import { useNavigation } from '@react-navigation/native';
+import { startQuiz, setCardNumber, setAnswerVisibility, setQuizEnded } from '../redux/actions/quizActions'
 
-function Stats({ quiz, deckName, route, ...props}) {
+
+function Stats({
+  deck,
+  quiz,
+  deckName,
+  startQuiz,
+  setAnswerVisibility,
+  setCardNumber,
+  setQuizEnded,
+  ...props }) {
 
   const width = useRef(new Animated.Value(0)).current;
+  const navigation = useNavigation();
 
   const today = timeToString();
   const activeQuiz = quiz.days[today][deckName];
+  const questionsLength = deck.questions.length;
 
   const goal = activeQuiz.correct / activeQuiz.questions;
+
+  const goBackToDeck = () => {
+    navigation.navigate('DeckDetails', { deckName });
+  }
+
+  const navigateToQuiz = () => {
+    startQuiz(today, deckName, questionsLength)
+    setCardNumber(0);
+    setAnswerVisibility(false);
+    setQuizEnded(false);
+    navigation.navigate('Quiz', { deckName, cardNumber: 0 });
+  }
+
   useEffect(() => {
     Animated.timing(
       width,
@@ -50,9 +75,18 @@ function Stats({ quiz, deckName, route, ...props}) {
         icon='arrow-left'
         mode='contained'
         style={{ marginTop: 10 }}
-        color='green'
+        color='purple'
       >
         Go Back to Deck
+      </Button>
+      <Button
+        onPress={navigateToQuiz}
+        icon='repeat'
+        mode='contained'
+        style={{ marginTop: 10 }}
+        color='orange'
+      >
+        Repeat Quiz
       </Button>
     </View>
   )
@@ -77,12 +111,21 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = ({ quiz }, { route }) => {
+const mapStateToProps = ({ decks, quiz }, { route }) => {
   const { deckName } = route.params;
+  const { cardNumber } = quiz.card;
   return {
     deckName,
     quiz,
+    deck: decks[deckName],
   }
 }
 
-export default connect(mapStateToProps)(Stats);
+const mapDispatchToProps = {
+  startQuiz,
+  setCardNumber,
+  setAnswerVisibility,
+  setQuizEnded,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Stats);
