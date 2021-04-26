@@ -1,4 +1,8 @@
 const decks = {
+  scss: {
+    name: 'scss',
+    questions: [],
+  },
   react: {
     name: 'react',
     questions: [
@@ -39,6 +43,14 @@ const decks = {
         question: 'Which method is not part of ReactDOM?',
         answer: 'one',
       },
+      {
+        question: 'Second question',
+        answer: 'one',
+      },
+      {
+        question: 'Third question',
+        answer: 'one',
+      },
     ],
   },
   flexbox: {
@@ -53,10 +65,6 @@ const decks = {
         answer: 'Row',
       },
     ]
-  },
-  scss: {
-    name: 'scss',
-    questions: [],
   },
   nodejs: {
     name: 'nodejs',
@@ -90,6 +98,7 @@ const quiz = {
     resultChecked: false,
     cardNumber: 0,
     actualDeck: '',
+    quizEnded: false,
   },
   days: {
     '2021-03-10': {
