@@ -12,21 +12,21 @@ export default function decksReducer(state = {}, action) {
       return {
         ...state,
         [action.payload]: {
-          'name': action.payload,
-          'questions': [],
+          name: action.payload,
+          questions: [],
         }
       }
     case ADD_QUESTION:
-      const { deckName, question, answer } = action.payload;
+      const { deckName, question, answer } = action;
       return {
         ...state,
         [deckName]: {
           ...state[deckName],
-          'questions': [
+          questions: [
             ...state[deckName].questions,
             {
-              'question': question,
-              'answer': answer,
+              question: question,
+              answer: answer,
             }
           ]
         }

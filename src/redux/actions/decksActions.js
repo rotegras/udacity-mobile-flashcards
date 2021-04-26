@@ -10,24 +10,24 @@ function receiveDecks(decks) {
   }
 }
 
-function getDeckId(id) {
+function getDeckId(deckName) {
   return {
     type: GET_DECK_ID,
-    payload: deckId,
+    payload: deckName,
   }
 }
 
-function addDeck(id) {
+function addDeck(deckName) {
   return {
     type: ADD_DECK,
-    payload: id,
+    payload: deckName,
   }
 }
 
-function addQuestion(deckId, question, answer) {
+function addQuestion(deckName, question, answer) {
   return {
     type: ADD_QUESTION,
-    payload: { deckId, question, answer },
+    deckName, question, answer,
   }
 }
 
