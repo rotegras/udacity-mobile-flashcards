@@ -1,52 +1,59 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Animated } from 'react-native';
+import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
 import { connect } from 'react-redux';
-import { Card } from 'react-native-paper';
+import { Card, Button } from 'react-native-paper';
 import { timeToString } from '../utils/helpers';
+import CardHeader from './Quiz/CardHeader';
 
+function Stats({ quiz, deckName, route, ...props}) {
 
-function Stats({ quiz, deckName, ...props}) {
-
-  const scaleX = useRef(new Animated.Value(0)).current;
+  const width = useRef(new Animated.Value(0)).current;
 
   const today = timeToString();
   const activeQuiz = quiz.days[today][deckName];
 
+  const goal = activeQuiz.correct / activeQuiz.questions;
   useEffect(() => {
     Animated.timing(
-      scaleX,
+      width,
       {
-        toValue: activeQuiz.correct / activeQuiz.questions,
-        duration: 1000,
+        toValue: goal,
+        duration: 800,
         useNativeDriver: true,
+        easing: Easing.cubic,
       },
     ).start();
-  }, [scaleX])
+  }, [])
 
   return (
-    <View style={styles.container}>
-      <Card style={styles.card}>
-        <Card.Title
-          title={deckName}
-          subtitle={today}
-          />
-        <Card.Content>
-          <Animated.View style={[
-            styles.bar, {
-            ...props.style,
-            flex: scaleX,
-            }]}
-          >
-
-          </Animated.View>
-          <Text>
-            {activeQuiz.questions}
-          </Text>
-          <Text>
-            {activeQuiz.correct}
-          </Text>
-        </Card.Content>
-      </Card>
+    <View>
+      <View style={styles.barWrapper}>
+        <Animated.View style={{
+            width: width.interpolate({
+              inputRange: [0, goal],
+              outputRange: ['0%', `${goal * 100}%`],
+            }),
+            height: 5,
+            backgroundColor: '#999',
+            margin: 0,
+            padding: 0,
+            maxWidth: '100%',
+          }}
+        >
+        </Animated.View>
+      </View>
+      <Text>
+      {`${activeQuiz.correct} correct questions of ${activeQuiz.questions}`}
+      </Text>
+      <Button
+        onPress={goBackToDeck}
+        icon='arrow-left'
+        mode='contained'
+        style={{ marginTop: 10 }}
+        color='green'
+      >
+        Go Back to Deck
+      </Button>
     </View>
   )
 }
@@ -59,10 +66,15 @@ const styles = StyleSheet.create({
   card: {
     margin: 10,
   },
-  bar: {
-    height: 20,
-    backgroundColor: 'black',
-  },
+  barWrapper: {
+    flex: 1,
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    justifyContent: 'center',
+  }
 });
 
 const mapStateToProps = ({ quiz }, { route }) => {
