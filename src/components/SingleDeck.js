@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { Avatar, Card, Button } from 'react-native-paper';
-import { startQuiz, setCardNumber, setAnswerVisibility } from '../redux/actions/quizActions';
+import { startQuiz, setCardNumber, setAnswerVisibility, setQuizEnded } from '../redux/actions/quizActions';
 import { timeToString } from '../utils/helpers';
 
 
@@ -10,6 +10,7 @@ function SingleDeck({
   deck,
   navigation,
   startQuiz,
+  setQuizEnded,
   setCardNumber,
   setAnswerVisibility,
 }) {
@@ -26,6 +27,7 @@ function SingleDeck({
     startQuiz(today, deckName, questionsLength)
     setCardNumber(0);
     setAnswerVisibility(false);
+    setQuizEnded(false);
     navigation.navigate('Quiz', { deckName, cardNumber: 0 });
   }
 
@@ -49,7 +51,7 @@ function SingleDeck({
             onPress={navigateToAddQuestion}
             style={styles.button}
           >
-            Add Question
+            Add Card
           </Button>
           <Button
             icon="arrow-right"
@@ -70,7 +72,6 @@ function SingleDeck({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: Dimensions.get('window').width,
     minHeight: Dimensions.get('window').height - 300,
   },
   card: {
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   button: {
-    marginBottom: 16
+    marginTop: 10
   },
   row: {
     flexDirection: 'row',
@@ -110,6 +111,7 @@ const mapDispatchToProps = {
   startQuiz,
   setCardNumber,
   setAnswerVisibility,
+  setQuizEnded,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleDeck);

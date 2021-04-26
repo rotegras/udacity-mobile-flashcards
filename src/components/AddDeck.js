@@ -3,6 +3,7 @@ import {
   TextInput,
   StyleSheet,
   View,
+  Text,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { addDeck } from '../redux/actions/decksActions';
@@ -15,14 +16,13 @@ function AddDeck({dispatch, navigation}) {
 
   const handleAddDeck = () => {
     dispatch(addDeck(deckName));
-    setDeckName('');
-    navigation.navigate('Home');
+    navigation.navigate('DeckDetails', { deckName });
   }
 
   return (
     <View style={styles.container}>
       <Card style={styles.card}>
-        <Card.Title title='Add new Deck' />
+        <Text style={styles.title}>Add New Deck</Text>
         <Card.Content style={styles.alignToBottom}>
           <TextInput
             value={deckName}
@@ -54,14 +54,19 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     marginLeft: 10,
     marginRight: 10,
-    padding: 10,
     flex: 1,
     justifyContent: 'space-between',
+    padding: 0,
+  },
+  title: {
+    fontWeight: 'bold',
+    margin: 16,
+    fontSize: 24,
   },
   input: {
     height: 40,
-    marginTop: 12,
-    marginBottom: 12,
+    marginTop: 'auto',
+    marginBottom: 'auto',
     backgroundColor: '#ebebeb',
     paddingLeft: 10,
   },
@@ -69,6 +74,7 @@ const styles = StyleSheet.create({
     marginTop: 'auto',
     marginBottom: 0,
     justifyContent: 'flex-end',
+    flex: 1,
   }
 });
 

@@ -20,12 +20,7 @@ function Main({dispatch}) {
     <NavigationContainer
       styles={styles.container}
     >
-      <Tab.Navigator
-        screenOptions={{
-          initialRouteName: 'Home',
-          headerShown: false,
-        }}
-      >
+      <Tab.Navigator>
         <Tab.Screen
           name='Home'
           component={MainStackNavigation}
@@ -44,6 +39,7 @@ function Main({dispatch}) {
           style={styles.tab}
           options={{
             tabBarLabel: 'Add Deck',
+            title: 'Add Deck',
             tabBarIcon: () => (
               <MaterialCommunityIcons name="plus" color={'#999'} size={24} />
             ),

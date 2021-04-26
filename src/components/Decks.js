@@ -12,7 +12,7 @@ import {
 function CardItem({ deck, navigation }) {
   const deckName = deck.name;
   const handlePressDeck = () => {
-    navigation.navigate('Deck Details', { deckName })
+    navigation.navigate('DeckDetails', { deckName })
   }
 
 
@@ -40,7 +40,7 @@ function CardItem({ deck, navigation }) {
 }
 
 function Decks({ sortedDecks, navigation, dispatch }) {
-  const renderItem= ({item}) => (
+  const renderItem = ({item}) => (
     <CardItem
       deck={item}
       navigation={navigation}
@@ -52,7 +52,6 @@ function Decks({ sortedDecks, navigation, dispatch }) {
     <SafeAreaView style={styles.container}>
       <FlatList
           data = {sortedDecks}
-          keyExtractor={(item) => item.name}
           renderItem={renderItem}
         />
     </SafeAreaView>
@@ -75,6 +74,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = ({decks}) => {
   return {
     sortedDecks: Object.values(decks)
+      .filter((d) => d.name)
       .sort((a, b) => b.name - a.name),
   }
 }

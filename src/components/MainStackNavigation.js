@@ -24,16 +24,23 @@ function MainStackNavigation ({ navigation }) {
         name='Decks'
         showHeader={false}
         component={Decks}
+        options={{
+          title: 'Home',
+        }}
       />
       <Stack.Screen
-        name='Deck Details'
+        name='DeckDetails'
         showHeader={false}
         component={SingleDeck}
+        options={({ route }) => ({ title: route.params.deckName })}
       />
       <Stack.Screen
         name='AddQuestion'
         showHeader={false}
         component={AddQuestion}
+        options={{
+          title: 'Add Question'
+        }}
       />
       <Stack.Screen
         name='Quiz'

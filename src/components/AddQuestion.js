@@ -10,39 +10,39 @@ import { addQuestion } from '../redux/actions/decksActions';
 import { Card, Button } from 'react-native-paper';
 
 
-function AddQuestion({addQuestion, navigation, route}) {
+function AddQuestion({addQuestion, navigation, deckName}) {
 
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
 
-  const { deckName } = route.params;
-
   const handleAddQuestion = () => {
     addQuestion(deckName, question, answer);
+    navigation.navigate('DeckDetails', {deckName});
     setQuestion('');
     setAnswer('');
-    navigation.navigate('Deck Details', {deckName});
   }
 
   return (
     <View style={styles.container}>
       <Card style={styles.card}>
-        <Card.Title
-          title='Add a new question'
-        />
-        <Card.Content>
-          <TextInput
-            value={question}
-            placeholder='Enter Question'
-            onChangeText={setQuestion}
-            style={styles.input}
-            />
-          <TextInput
-            value={answer}
-            placeholder='Enter Answer'
-            onChangeText={setAnswer}
-            style={styles.input}
-            />
+        <Card.Content style={styles.cardContent}>
+          <Text style={styles.title}>
+            Add a New Question
+          </Text>
+          <View>
+            <TextInput
+              value={question}
+              placeholder='Enter Question'
+              onChangeText={setQuestion}
+              style={styles.input}
+              />
+            <TextInput
+              value={answer}
+              placeholder='Enter Answer'
+              onChangeText={setAnswer}
+              style={styles.input}
+              />
+          </View>
           <Button
             onPress={handleAddQuestion} disabled={question === '' || answer === ''}
             icon="plus-thick" mode="contained" color='red'
@@ -64,6 +64,15 @@ const styles = StyleSheet.create({
   card: {
     marginLeft: 10,
     marginRight: 10,
+    flex: 1,
+  },
+  cardContent: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 24,
   },
   input: {
     height: 40,
@@ -87,9 +96,16 @@ const styles = StyleSheet.create({
   }
 });
 
+const mapStateToProps = ({ }, { route }) => {
+  const { deckName } = route.params;
+  return {
+    deckName,
+  }
+}
+
 const mapDispatchToProps = {
   addQuestion,
 }
 
 
-export default connect(null , mapDispatchToProps)(AddQuestion);
+export default connect(mapStateToProps , mapDispatchToProps)(AddQuestion);
