@@ -5,6 +5,7 @@ const SET_RESULT_CHECKED = 'SET_RESULT_CHECKED';
 const SET_CARD_NUMBER = 'SET_CARD_NUMBER';
 const SET_ACTUAL_DECK = 'SET_ACTUAL_DECK';
 const START_QUIZ = 'START_QUIZ';
+const SET_QUIZ_ENDED = 'SET_QUIZ_ENDED';
 
 
 function receiveAllQuiz(quiz) {
@@ -60,6 +61,13 @@ function startQuiz(today, deckName, questionsLength) {
   }
 }
 
+function setQuizEnded(value) {
+  return {
+    type: SET_QUIZ_ENDED,
+    quizEnded: value,
+  }
+}
+
 
 export {
   RECEIVE_ALL_QUIZ,
@@ -69,6 +77,8 @@ export {
   SET_CARD_NUMBER,
   SET_ACTUAL_DECK,
   START_QUIZ,
+  SET_QUIZ_ENDED,
+  setQuizEnded,
   setResultsChecked,
   setCardNumber,
   setAnswerVisibility,
