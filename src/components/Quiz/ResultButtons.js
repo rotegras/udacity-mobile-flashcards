@@ -6,10 +6,9 @@ import {
   setAnswerVisibility,
   setCardNumber,
   updateQuizResult,
-  setQuizEnded,
-  quizEnded,
+  setQuizCompleted,
 } from '../../redux/actions/quizActions';
-import { timeToString } from '../../utils/helpers';
+import { clearLocalNotification, setLocalNotification, timeToString } from '../../utils/helpers';
 import { useNavigation } from '@react-navigation/native';
 
 const today = timeToString();
@@ -22,31 +21,29 @@ function ResultButtons({
   setAnswerVisibility,
   updateQuizResult,
   setCardNumber,
-  quizEnded,
-  setQuizEnded,
+  setQuizCompleted,
 }) {
 
   const navigation = useNavigation();
 
-  const handlePressCorrect = () => {
-    updateQuizResult(today, deckName, questionsLength);
+  const pressActions = () => {
     if (cardNumber < (questionsLength - 1)) {
-      navigation.navigate('Quiz', {deckName, cardNumber: (cardNumber) => cardNumber + 1});
-      setAnswerVisibility(false);
       setCardNumber(cardNumber + 1);
+      navigation.navigate('Quiz', {deckName});
+      setAnswerVisibility(false);
     } else {
-      setQuizEnded(true);
+      setQuizCompleted(true);
+      clearLocalNotification().then(setLocalNotification);
     }
   }
 
+  const handlePressCorrect = () => {
+    updateQuizResult(today, deckName, questionsLength);
+    pressActions();
+  }
+
   const handlePressIncorrect = () => {
-    if (cardNumber < (questionsLength - 1)) {
-      navigation.navigate('Quiz', { deckName, cardNumber: (cardNumber) => cardNumber + 1 });
-      setAnswerVisibility(false);
-      setCardNumber(cardNumber + 1);
-    } else {
-      setQuizEnded(true);
-    }
+    pressActions();
   }
 
   return (
@@ -76,19 +73,19 @@ function ResultButtons({
 }
 
 const mapStateToProps = ({quiz, decks}, { route }) => {
-  const { cardNumber, answerVisibility, quizEnded } = quiz.card;
+  const { cardNumber, answerVisibility, quizCompleted } = quiz.card;
   const { deckName } = route.params;
   return {
     answerVisibility,
     cardNumber,
     deckName,
     questionsLength: decks[deckName].questions.length,
-    quizEnded,
+    quizCompleted,
   }
 }
 
 const mapDispatchToProps = {
-  setQuizEnded,
+  setQuizCompleted,
   updateQuizResult,
   setAnswerVisibility,
   setCardNumber,

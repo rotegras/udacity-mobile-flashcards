@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { Avatar, Card, Button } from 'react-native-paper';
-import { startQuiz, setCardNumber, setAnswerVisibility, setQuizEnded } from '../redux/actions/quizActions';
+import { startQuiz, setCardNumber, setAnswerVisibility, setQuizCompleted } from '../redux/actions/quizActions';
 import { timeToString } from '../utils/helpers';
 
 
@@ -10,7 +10,7 @@ function SingleDeck({
   deck,
   navigation,
   startQuiz,
-  setQuizEnded,
+  setQuizCompleted,
   setCardNumber,
   setAnswerVisibility,
 }) {
@@ -27,8 +27,8 @@ function SingleDeck({
     startQuiz(today, deckName, questionsLength)
     setCardNumber(0);
     setAnswerVisibility(false);
-    setQuizEnded(false);
-    navigation.navigate('Quiz', { deckName, cardNumber: 0 });
+    setQuizCompleted(false);
+    navigation.navigate('Quiz', { deckName });
   }
 
   return (
@@ -111,7 +111,7 @@ const mapDispatchToProps = {
   startQuiz,
   setCardNumber,
   setAnswerVisibility,
-  setQuizEnded,
+  setQuizCompleted,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleDeck);

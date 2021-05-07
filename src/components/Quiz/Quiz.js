@@ -18,7 +18,7 @@ function Quiz({
   cardNumber,
   route,
   setAnswerVisibility,
-  quizEnded,
+  quizCompleted,
   ...props
 }) {
 
@@ -51,7 +51,7 @@ function Quiz({
     >
       <Card style={styles.card}>
         {
-          quizEnded
+          quizCompleted
           ? <Card.Content style={styles.cardContent}>
               <CardHeader route={route} />
               <Stats route={route} />
@@ -91,10 +91,10 @@ function Quiz({
 
 const mapStateToProps = ({ quiz, decks }, { route }) => {
   const { deckName } = route.params;
-  const { answerVisibility, cardNumber, quizEnded } = quiz.card;
+  const { answerVisibility, cardNumber, quizCompleted } = quiz.card;
   const deck = decks[deckName];
   return {
-    quizEnded,
+    quizCompleted,
     answerVisibility,
     deckName,
     deckQuestions: deck.questions,

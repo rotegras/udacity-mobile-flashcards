@@ -2,7 +2,7 @@ import {
   RECEIVE_ALL_QUIZ,
   UPDATE_QUIZ_RESULT,
   SET_ANSWER_VISIBILITY,
-  SET_QUIZ_ENDED,
+  SET_QUIZ_COMPLETED,
   SET_CARD_NUMBER,
   SET_ACTUAL_DECK,
   START_QUIZ,
@@ -56,12 +56,12 @@ export default function quizReducer(state = {}, action) {
           answerVisibility: action.payload,
         }
       }
-    case SET_QUIZ_ENDED:
+    case SET_QUIZ_COMPLETED:
       return {
         ...state,
         card: {
           ...state.card,
-          quizEnded: action.quizEnded,
+          quizCompleted: action.quizCompleted,
         }
       }
     case SET_CARD_NUMBER:

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button } from 'react-native-paper';
 import { timeToString } from '../utils/helpers';
 import { useNavigation } from '@react-navigation/native';
-import { startQuiz, setCardNumber, setAnswerVisibility, setQuizEnded } from '../redux/actions/quizActions'
+import { startQuiz, setCardNumber, setAnswerVisibility, setQuizCompleted } from '../redux/actions/quizActions'
 
 
 function Stats({
@@ -14,7 +14,7 @@ function Stats({
   startQuiz,
   setAnswerVisibility,
   setCardNumber,
-  setQuizEnded,
+  setQuizCompleted,
   ...props }) {
 
   const width = useRef(new Animated.Value(0)).current;
@@ -34,8 +34,8 @@ function Stats({
     startQuiz(today, deckName, questionsLength)
     setCardNumber(0);
     setAnswerVisibility(false);
-    setQuizEnded(false);
-    navigation.navigate('Quiz', { deckName, cardNumber: 0 });
+    setQuizCompleted(false);
+    navigation.navigate('Quiz', { deckName });
   }
 
   useEffect(() => {
@@ -44,7 +44,7 @@ function Stats({
       {
         toValue: goal,
         duration: 800,
-        useNativeDriver: true,
+        useNativeDriver: false,
         easing: Easing.cubic,
       },
     ).start();
@@ -125,7 +125,7 @@ const mapDispatchToProps = {
   startQuiz,
   setCardNumber,
   setAnswerVisibility,
-  setQuizEnded,
+  setQuizCompleted,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Stats);

@@ -53,6 +53,7 @@ function Decks({ sortedDecks, navigation, dispatch }) {
       <FlatList
           data = {sortedDecks}
           renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
         />
     </SafeAreaView>
   )
