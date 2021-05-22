@@ -74,20 +74,12 @@ const decks = {
     name: 'bash',
     questions: [],
   },
-  sql: {
-    name: 'sql',
-    questions: [],
-  },
   gatsby: {
     name: 'gatsby',
     questions: [],
   },
   drupal: {
     name: 'drupal',
-    questions: [],
-  },
-  wordpress: {
-    name: 'wordpress',
     questions: [],
   },
 }
@@ -98,7 +90,7 @@ const quiz = {
     resultChecked: false,
     cardNumber: 0,
     actualDeck: '',
-    quizEnded: false,
+    quizCompleted: false,
   },
   days: {
     '2021-03-10': {
