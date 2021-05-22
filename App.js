@@ -5,13 +5,9 @@ import { Provider } from 'react-redux';
 import { store, persistor } from './src/redux/store/store';
 import MainTabNavigation from './src/components/MainTabNavigation';
 import { PersistGate } from 'redux-persist/integration/react';
-import { setLocalNotification } from './src/utils/helpers';
+
 
 export default function App() {
-
-  useEffect(() => {
-    setLocalNotification();
-  }, []);
 
   return (
     <Provider store={store}>

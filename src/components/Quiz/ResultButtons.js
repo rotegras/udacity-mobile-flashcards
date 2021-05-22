@@ -8,7 +8,7 @@ import {
   updateQuizResult,
   setQuizCompleted,
 } from '../../redux/actions/quizActions';
-import { clearLocalNotification, setLocalNotification, timeToString } from '../../utils/helpers';
+import { timeToString } from '../../utils/helpers';
 import { useNavigation } from '@react-navigation/native';
 
 const today = timeToString();
@@ -33,7 +33,6 @@ function ResultButtons({
       setAnswerVisibility(false);
     } else {
       setQuizCompleted(true);
-      clearLocalNotification().then(setLocalNotification);
     }
   }
 

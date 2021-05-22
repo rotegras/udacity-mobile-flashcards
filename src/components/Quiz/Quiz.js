@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Card, Button  } from 'react-native-paper';
-import { Animated, Text } from 'react-native';
+import { Animated, Text, View } from 'react-native';
 import styles from './Quiz.styles';
 import ResultButtons from './ResultButtons';
 import CardHeader from './CardHeader';
@@ -58,30 +58,32 @@ function Quiz({
             </Card.Content>
           : <Card.Content style={styles.cardContent}>
               <CardHeader route={route} />
-              <Text style={styles.questionText}>
-                {cardQuestion}
-              </Text>
-              {
-                !answerVisibility
-                ?
-                  <Button
-                    icon='pencil-plus'
-                    mode='contained'
-                    color={'green'}
-                    onPress={handleAnswerVisibility}
-                  >
-                    Show Answer
-                  </Button>
-                : <Text>
-                    Answer: {cardAnswer}
-                  </Text>
-              }
-              {
-                answerVisibility &&
-                <ResultButtons route={route}
-                  style={styles.alignToBottom}
-                />
-              }
+              <View style={{justifyContent: 'space-between', flex: 1}}>
+                <Text style={styles.questionText}>
+                  {cardQuestion}
+                </Text>
+                {
+                  !answerVisibility
+                  ?
+                    <Button
+                      icon='pencil-plus'
+                      mode='contained'
+                      color={'green'}
+                      onPress={handleAnswerVisibility}
+                    >
+                      Show Answer
+                    </Button>
+                  : <Text>
+                      Answer: {cardAnswer}
+                    </Text>
+                }
+                {
+                  answerVisibility &&
+                  <ResultButtons route={route}
+                    style={styles.alignToBottom}
+                  />
+                }
+              </View>
             </Card.Content>
           }
       </Card>

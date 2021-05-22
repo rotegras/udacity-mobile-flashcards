@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, createTabNavigation, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { handleReceiveAllData  } from '../redux/actions/sharedActions';
 import MainStackNavigation from './MainStackNavigation';
 import AddDeck from './AddDeck';
@@ -11,7 +11,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 const Tab = createBottomTabNavigator();
 
-function Main({dispatch}) {
+function MainTabNavigation({dispatch}) {
+
   useEffect(() => {
     dispatch(handleReceiveAllData());
   }, []);
@@ -62,4 +63,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default connect()(Main);
+export default connect()(MainTabNavigation);

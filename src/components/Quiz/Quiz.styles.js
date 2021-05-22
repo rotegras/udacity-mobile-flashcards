@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: Dimensions.get('window').width,
-    // TODO: find value
     minHeight: Dimensions.get('window').height - 300,
   },
   card: {
